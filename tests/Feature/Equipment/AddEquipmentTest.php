@@ -1,16 +1,16 @@
 <?php
 
-namespace Tests\Feature;
+namespace Tests\Feature\Equipment;
 
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
-class ExampleTest extends TestCase
+class AddEquipmentTest extends TestCase
 {
     use RefreshDatabase;
     
     /** @test */
-    public function a_user_can_create_equipment()
+    public function an_authenticated_user_can_create_equipment()
     {
         $equipment = make(Equipment::class);
 
