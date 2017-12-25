@@ -29,6 +29,13 @@
 </div>
 
 <div class="field">
+    <label class="label">Weight:</label>
+    <div class="control">
+        <input class="input" type="text" name="weight" value="{{ $equipment->weight or old('weight') }}">
+    </div>
+</div>
+
+<div class="field">
     <label class="label">Purchase Date:</label>
     <div class="control">
         <input class="input" type="text" name="purchase_date" value="{{ $equipment->purchase_date or old('purchase_date') }}">

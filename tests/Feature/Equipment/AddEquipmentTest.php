@@ -4,6 +4,7 @@ namespace Tests\Feature\Equipment;
 
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use App\Equipment;
 
 class AddEquipmentTest extends TestCase
 {
@@ -12,6 +13,8 @@ class AddEquipmentTest extends TestCase
     /** @test */
     public function an_authenticated_user_can_create_equipment()
     {
+        $this->signIn();
+
         $equipment = make(Equipment::class);
 
         $this->post('/equipment', $equipment->toArray());
@@ -19,12 +22,7 @@ class AddEquipmentTest extends TestCase
         $this->assertDatabaseHas('equipment', [
             'name' => $equipment->name,
             'brand' => $equipment->brand,
-            'model' => $equipment->model,
-            'serial_number' => $equipment->serial_number,
-            'weight' => $equipment->weight,
-            'description' => $equipment->description,
-            'purchase_value' => $equipment->purchase_value,
-            'purchase_date' => $equipment->purchase_date
+            'model' => $equipment->model
         ]);
     }
 }
