@@ -4,12 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Equipment;
 use App\Http\Requests\AddEquipmentRequest;
+use Illuminate\Http\Request;
 
 class EquipmentController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth')->except(['index', 'show']);
+        //$this->middleware('auth')->except(['index', 'show']);
     }
     
     /**
@@ -20,7 +21,7 @@ class EquipmentController extends Controller
     public function index()
     {
         $equipment = Equipment::all();
-        
+
         return view('equipment.index', compact('equipment'));
     }
 
@@ -51,9 +52,10 @@ class EquipmentController extends Controller
      * @param  \App\Equipment  $equipment
      * @return \Illuminate\Http\Response
      */
-    public function show(Equipment $equipment)
+    public function show($id)
     {
-        //
+        $equipment = Equipment::find($id);
+        return view('equipment.show', compact('equipment'));
     }
 
     /**
@@ -64,7 +66,7 @@ class EquipmentController extends Controller
      */
     public function edit(Equipment $equipment)
     {
-        //
+        return view('equipment.edit', compact('equipment'));
     }
 
     /**
@@ -74,9 +76,13 @@ class EquipmentController extends Controller
      * @param  \App\Equipment  $equipment
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Equipment $equipment)
+    public function update(Request $request, $id)
     {
-        //
+        $equipment = Equipment::find($id);
+
+        $equipment->update($request->all());
+
+        $equipment->save();
     }
 
     /**

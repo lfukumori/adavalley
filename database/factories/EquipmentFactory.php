@@ -5,7 +5,7 @@ use Faker\Generator as Faker;
 
 $factory->define(Equipment::class, function (Faker $faker) {
     return [
-        'name' => $faker->name,
+        'name' => $faker->word,
         'brand' => $faker->word,
         'model' => $faker->word,
         'serial_number' => $faker->ean8,

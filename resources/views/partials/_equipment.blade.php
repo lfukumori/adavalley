@@ -22,9 +22,9 @@
                 <tbody>
                     @forelse($equipment as $e)
                         <tr>
-                            <td><a href="{{ route('equipment.show', $e->id) }}">{{ $e->name() }}</a></td>
-                            <td>{{ $e->brand() }}</td>
-                            <td>{{ $e->model() }}</td>
+                            <td><a href="{{ route('equipment.show', $e->id) }}">{{ $e->name }}</a></td>
+                            <td>{{ $e->brand }}</td>
+                            <td>{{ $e->model }}</td>
                         </tr>
                     @empty
                         <tr><td colspan="3" style="text-align:center;color:red;">No equipment yet!</td></tr>
@@ -57,9 +57,9 @@
             <tbody>
                 @forelse($equipment as $e)
                     <tr>
-                        <td><a href="{{ route('equipment.show', $e) }}">{{ $e->name() }}</a></td>
-                        <td>{{ $e->brand() }}</td>
-                        <td>{{ $e->model() }}</td>
+                        <td><a href="{{ route('equipment.show', $e->id) }}">{{ $e->name }}</a></td>
+                        <td>{{ $e->brand }}</td>
+                        <td>{{ $e->model }}</td>
                     </tr>
                 @empty
                     <tr><td colspan="3" style="text-align:center;color:red;">No equipment</td></tr>
@@ -67,6 +67,6 @@
             </tbody>
         </table>
 
-  </div> -->
+    </div>
     
-</div>
+</div> -->

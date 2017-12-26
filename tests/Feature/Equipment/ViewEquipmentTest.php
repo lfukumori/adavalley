@@ -13,11 +13,13 @@ class ViewEquipmentTest extends TestCase
     /** @test */
     public function any_user_can_view_a_list_of_all_equipment()
     {
-        $equipment = factory(Equipment::class, 3)->create();
-    
+        $equipment1 = create(Equipment::class);
+        $equipment2 = create(Equipment::class);
+        $equipment3 = create(Equipment::class);
+
         $this->get('/equipment')
-            ->assertSee($equipment->get(0)->name)
-            ->assertSee($equipment->get(1)->name)
-            ->assertSee($equipment->get(2)->name);
+            ->assertSee($equipment1->name)
+            ->assertSee($equipment2->name)
+            ->assertSee($equipment3->name);
     }
 }

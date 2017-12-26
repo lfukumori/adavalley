@@ -5,7 +5,7 @@
 
 @section('content')
 	<section class="column">
-		@foreach($equipment['attributes'] as $prop => $value)
+		@foreach($equipment->toArray() as $prop => $value)
 			<p>
 				<span class="title is-5">{{ ucwords($prop) }}: </span>
 				<span class="subtitle is-6 has-text-info">{{ $value }}</span>
@@ -18,7 +18,7 @@
 			<a href="{{ route('equipment.edit', $equipment->id) }}" class="button is-warning">Edit</a>
 		</div>
 
-		<div class="box">
+		{{-- <div class="box">
 			<h1 class="title is-3">Parts On Equipment</h1>
 			<ul>
 				@forelse($equipment->parts as $part)
@@ -27,6 +27,6 @@
 					No Parts Associated With This Piece Of Equipment.
 				@endforelse
 			</ul>
-		</div>
+		</div> --}}
 	</section>
 @stop

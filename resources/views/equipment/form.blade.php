@@ -57,9 +57,9 @@
 </div>
 
 <div class="field">
-    <label class="label">Real Value:</label>
+    <label class="label">Current Value:</label>
     <div class="control">
-        <input class="input" type="text" name="real_value" value="{{ $equipment->real_value or old('real_value') }}">
+        <input class="input" type="text" name="current_value" value="{{ $equipment->current_value or old('current_value') }}">
     </div>
 </div>
 
@@ -108,13 +108,6 @@
     <label class="label">Description:</label>
     <div class="control">
         <input class="input" type="text" name="description" value="{{ $equipment->description or old('description') }}">
-    </div>
-</div>
-
-<div class="field">
-    <label class="label">Extended Description:</label>
-    <div class="control">
-        <input class="input" type="text" name="extended_description" value="{{ $equipment->extended_description or old('extended_description') }}">
     </div>
 </div>
 
