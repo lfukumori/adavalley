@@ -10,6 +10,7 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/equipment', 'EquipmentController@index');
 Route::post('/equipment', 'EquipmentController@store');
 
 Route::get('/', function () {

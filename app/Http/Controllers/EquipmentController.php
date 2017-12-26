@@ -9,7 +9,7 @@ class EquipmentController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth')->only(['store']);
+        $this->middleware('auth')->except(['index', 'show']);
     }
     
     /**
@@ -19,7 +19,9 @@ class EquipmentController extends Controller
      */
     public function index()
     {
-        //
+        $equipment = Equipment::all();
+        
+        return view('equipment.index', compact('equipment'));
     }
 
     /**
