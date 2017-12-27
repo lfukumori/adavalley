@@ -43,7 +43,9 @@ class EquipmentController extends Controller
      */
     public function store(AddEquipmentRequest $request)
     {
-        (new Equipment($request->validated()))->save();
+        $equipment = Equipment::create($request->all());
+
+        return view('equipment.show', compact('equipment'));
     }
 
     /**
@@ -83,6 +85,8 @@ class EquipmentController extends Controller
         $equipment->update($request->all());
 
         $equipment->save();
+
+        return view('equipment.show', compact('equipment'));
     }
 
     /**
