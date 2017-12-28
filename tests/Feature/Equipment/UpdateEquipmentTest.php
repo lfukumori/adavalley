@@ -16,6 +16,8 @@ class UpdateEquipmentTest extends TestCase
         $updatedName = 'Updated Name';
         $equipment = create(Equipment::class);
 
+        $this->signIn();
+
         $this->patch("/equipment/{$equipment->id}", ['name' => $updatedName]);
 
         $this->assertDatabaseHas('equipment', ['name' => $updatedName]);

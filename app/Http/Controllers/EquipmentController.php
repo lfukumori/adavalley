@@ -10,7 +10,7 @@ class EquipmentController extends Controller
 {
     public function __construct()
     {
-        //$this->middleware('auth')->except(['index', 'show']);
+        $this->middleware('auth')->except(['index', 'show']);
     }
     
     /**
@@ -83,8 +83,6 @@ class EquipmentController extends Controller
         $equipment = Equipment::find($id);
 
         $equipment->update($request->all());
-
-        $equipment->save();
 
         return view('equipment.show', compact('equipment'));
     }
