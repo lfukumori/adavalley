@@ -17,4 +17,9 @@ class Equipment extends Model
     {
         return "/equipment/{$this->id}";
     }
+
+    public function store()
+    {
+        $this->delete();
+    }
 }

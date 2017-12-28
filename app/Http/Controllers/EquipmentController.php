@@ -32,7 +32,7 @@ class EquipmentController extends Controller
      */
     public function create()
     {
-        //
+        return view('equipment.create');
     }
 
     /**
@@ -56,7 +56,7 @@ class EquipmentController extends Controller
      */
     public function show($id)
     {
-        $equipment = Equipment::find($id);
+        $equipment = Equipment::findOrFail($id);
         return view('equipment.show', compact('equipment'));
     }
 
@@ -80,7 +80,7 @@ class EquipmentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $equipment = Equipment::find($id);
+        $equipment = Equipment::findOrFail($id);
 
         $equipment->update($request->all());
 
@@ -88,13 +88,15 @@ class EquipmentController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove the specified resource from production to storage.
      *
      * @param  \App\Equipment  $equipment
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Equipment $equipment)
+    public function destroy($id)
     {
-        //
+        $equipment = Equipment::findOrFail($id)->store();
+
+        return view('equipment.index');
     }
 }

@@ -2,9 +2,9 @@
 
 namespace Tests\Feature\Equipment;
 
+use App\Equipment;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use App\Equipment;
 
 class AddEquipmentTest extends TestCase
 {

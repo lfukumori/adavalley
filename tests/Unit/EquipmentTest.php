@@ -29,11 +29,23 @@ class EquipmentTest extends TestCase
         $this->equipment = create(Equipment::class);
     }
     
-    /** @test */
-    public function a_peice_of_equipment_knows_its_url_route_path()
+    /** 
+     * Equipment knows its url route path.
+     */
+    public function testPath()
     {
         $urlRoute = "/equipment/{$this->equipment->id}";
 
         $this->assertEquals($urlRoute, $this->equipment->path());
+    }
+
+    /** 
+     * Move equipment out of production to storage.
+     */
+    public function testStore()
+    {
+        $this->equipment->store();
+
+        $this->assertDatabaseMissing('equipment', ['id' => $this->equipment->id]);
     }
 }
