@@ -24,8 +24,8 @@ $factory->define(Equipment::class, function (Faker $faker) {
         'procedures_location' => $faker->word,
         'date_stored' => null,
         'service_by_days' => $faker->numberBetween(10, 90),
-        'manual_file_location' => null,
-        'schematics_location' => null,
+        'manual_file_location' => 'some location',
+        'schematics_location' => 'another location',
         'active' => true
     ];
 });

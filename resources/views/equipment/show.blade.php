@@ -26,7 +26,7 @@
 				@empty
 					No Parts Associated With This Piece Of Equipment.
 				@endforelse
-			</ul>
-		</div> --}}
+			</ul> --}}
+		</div>
 	</section>
 @stop
