@@ -54,9 +54,8 @@ class EquipmentController extends Controller
      * @param  \App\Equipment  $equipment
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($equipment)
     {
-        $equipment = Equipment::findOrFail($id);
         return view('equipment.show', compact('equipment'));
     }
 
@@ -78,10 +77,8 @@ class EquipmentController extends Controller
      * @param  \App\Equipment  $equipment
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Equipment $equipment)
     {
-        $equipment = Equipment::findOrFail($id);
-
         $equipment->update($request->all());
 
         return view('equipment.show', compact('equipment'));
@@ -95,7 +92,9 @@ class EquipmentController extends Controller
      */
     public function destroy($id)
     {
-        $equipment = Equipment::findOrFail($id)->store();
+        $equipment = Equipment::findOrFail($id);
+
+        $equipment->store();
 
         return view('equipment.index');
     }

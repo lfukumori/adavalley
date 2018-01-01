@@ -38,6 +38,9 @@ class CreateEquipmentTable extends Migration
             $table->integer('service_by_days')->nullable();
             $table->string('status')->nullable();
             $table->date('date_stored')->nullable();
+
+            $table->softDeletes();
+            
             $table->timestamps();
         });
     }

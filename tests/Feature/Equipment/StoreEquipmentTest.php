@@ -19,6 +19,6 @@ class StoreEquipmentTest extends TestCase
 
         $this->delete($equipment->path());
 
-        $this->assertDatabaseMissing('equipment', ['id' => $equipment->id]);
+        $this->assertSoftDeleted('equipment', $equipment->toArray());
     }
 }

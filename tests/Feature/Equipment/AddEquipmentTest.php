@@ -11,7 +11,7 @@ class AddEquipmentTest extends TestCase
     use RefreshDatabase;
     
     /** @test */
-    public function only_authenticated_users_can_create_equipment()
+    public function only_authenticated_users_can_add_equipment()
     {
         $this->signIn();
 
@@ -19,10 +19,7 @@ class AddEquipmentTest extends TestCase
 
         $this->post('/equipment', $equipment->toArray());
 
-        $this->assertDatabaseHas('equipment', [
-            'name' => $equipment->name,
-            'brand' => $equipment->brand,
-            'model' => $equipment->model
-        ]);
+        $this->assertDatabaseHas('equipment', $equipment->toArray());
+
     }
 }
