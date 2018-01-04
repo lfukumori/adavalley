@@ -54,7 +54,7 @@ class EquipmentController extends Controller
      * @param  \App\Equipment  $equipment
      * @return \Illuminate\Http\Response
      */
-    public function show($equipment)
+    public function show(Equipment $equipment)
     {
         return view('equipment.show', compact('equipment'));
     }
