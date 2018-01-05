@@ -1,17 +1,23 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="column">
+<section>
+	<div class="container">
+		<div class="columns">
+			<div class="column">
 
-     @include("partials.errors")
+				@include("partials.errors")
 
-     <form method="POST" action="{{ route('equipment.update', $equipment->id) }}">
-        {{ method_field('PATCH') }}
+				<form method="POST" action="{{ route('equipment.update', $equipment->id) }}">
+					{{ method_field('PATCH') }}
 
-        @include('equipment.form', ['submitButtonText' => 'Update'])
-    </form>
+					@include('equipment.form', ['submitButtonText' => 'Update'])
+				</form>
 
-</div>
+			</div>
 
-<div class="column is-4-tablet"></div>
+			<div class="column is-4-tablet"></div>
+		</div>
+	</div>
+</section>
 @stop

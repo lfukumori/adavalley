@@ -1,19 +1,28 @@
 @extends("layouts.app")
 
 @section("content")
-    <div class="column">
+<section>
+	<div class="container">
+		<div class="columns">
 
-    	<h2 class="title has-text-centered">Create Equipment</h2>
+			<div class="column">
 
-        @include("partials.errors")
-        
-    	<form method="POST" action="{{ url('/equipment') }}">
+				<h2 class="title has-text-centered">Create Equipment</h2>
 
-    	    @include("equipment.form", ["submitButtonText" => "Create"])
+				@include("partials.errors")
 
-    	</form>
+				<form method="POST" action="{{ url('/equipment') }}">
 
+					@include("equipment.form", ["submitButtonText" => "Create"])
+
+				</form>
+
+			</div>
+
+			<div class="column is-4-tablet"></div>
+		</div>
     </div>
+</section>
 
-    <div class="column is-4-tablet"></div>
+</div>
 @stop
