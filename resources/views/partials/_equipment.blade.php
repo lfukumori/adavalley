@@ -33,40 +33,9 @@
             </table>
         </div>
     </div>
-    <footer class="card-footer">
+    <!-- <footer class="card-footer">
         <a href="#" class="card-footer-item">Save</a>
         <a href="#" class="card-footer-item">Edit</a>
         <a href="#" class="card-footer-item">Delete</a>
-    </footer>
+    </footer> -->
 </div>
-
-<!-- <div class="panel">
-
-    <p class="panel-heading">Equipment</p>
-
-    <div class="panel-block">
-            
-        <table class="table is-striped is-bordered">
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Brand</th>
-                    <th>Model</th>
-                </tr>
-            </thead>
-            <tbody>
-                @forelse($equipment as $e)
-                    <tr>
-                        <td><a href="{{ route('equipment.show', $e->id) }}">{{ $e->name }}</a></td>
-                        <td>{{ $e->brand }}</td>
-                        <td>{{ $e->model }}</td>
-                    </tr>
-                @empty
-                    <tr><td colspan="3" style="text-align:center;color:red;">No equipment</td></tr>
-                @endforelse
-            </tbody>
-        </table>
-
-    </div>
-    
-</div> -->

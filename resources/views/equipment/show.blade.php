@@ -7,7 +7,7 @@
 <section>
 	<div class="container">
 		<div class="columns">
-			<div class="column">
+			<div class="column is-6-tablet is-offset-2">
 				@foreach($equipment->toArray() as $prop => $value)
 				<p>
 					<span class="title is-5">{{ ucwords($prop) }}: </span>

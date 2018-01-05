@@ -13,9 +13,9 @@ class StoreEquipmentTest extends TestCase
     /** @test */
     public function authenticated_users_can_move_equipment_to_storage()
     {
-        $equipment = create(Equipment::class);
-
         $this->signIn();
+        
+        $equipment = create(Equipment::class);
 
         $this->delete($equipment->path());
 
