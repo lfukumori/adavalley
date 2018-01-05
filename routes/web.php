@@ -11,7 +11,7 @@
 |
 */
 
-Route::get('/', 'EquipmentController@index');
+Route::get('/', 'HomeController@index');
 
 Route::resource('equipment', 'EquipmentController');
 
