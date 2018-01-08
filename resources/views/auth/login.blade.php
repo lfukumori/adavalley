@@ -41,11 +41,16 @@
 					</div>
 
 					<div class="field">
+  						<input id="remember" type="checkbox" name="remember" class="switch is-outlined is-info" c{{ old('remember') ? 'checked' : '' }}>
+  						<label for="remember">Remember me?</label>
+					</div>
+
+					<!-- <div class="field">
 						<label class="checkbox">
-							<input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}>
+							<input type="checkbox" name="remember" >
 							Remember me
 						</label>
-					</div>
+					</div> -->
 
 					<button style="width:100%;margin-top:5px;" type="submit" class="button  is-info is-large">
 						Login
