@@ -1,9 +1,9 @@
 {{ csrf_field() }}
 
 <div class="field">
-    <label class="label">Name:</label>
+    <label class="label">Number:</label>
     <div class="control">
-        <input class="input" type="text" name="name" value="{{ $equipment->name or old('name') }}">
+        <input class="input" type="text" name="number" value="{{ $equipment->number or old('number') }}">
     </div>
 </div>
 
@@ -36,6 +36,20 @@
 </div>
 
 <div class="field">
+    <label class="label">Department:</label>
+    <div class="control">
+        <input class="input" type="text" name="department" value="{{ $equipment->department or old('department') }}">
+    </div>
+</div>
+
+<div class="field">
+    <label class="label">Category:</label>
+    <div class="control">
+        <input class="input" type="text" name="category" value="{{ $equipment->category or old('category') }}">
+    </div>
+</div>
+
+<div class="field">
     <label class="label">Purchase Date:</label>
     <div class="control">
         <input class="input" type="text" name="purchase_date" value="{{ $equipment->purchase_date or old('purchase_date') }}">
@@ -53,6 +67,13 @@
     <label class="label">Depreciated Value:</label>
     <div class="control">
         <input class="input" type="text" name="depreciated_value" value="{{ $equipment->depreciated_value or old('depreciated_value') }}">
+    </div>
+</div>
+
+<div class="field">
+    <label class="label">Real Value:</label>
+    <div class="control">
+        <input class="input" type="text" name="real_value" value="{{ $equipment->real_value or old('real_value') }}">
     </div>
 </div>
 
@@ -112,6 +133,13 @@
 </div>
 
 <div class="field">
+    <label class="label">Extended Description:</label>
+    <div class="control">
+        <input class="input" type="text" name="extended_description" value="{{ $equipment->extended_description or old('extended_description') }}">
+    </div>
+</div>
+
+<div class="field">
     <label class="label">Depreciation Value:</label>
     <div class="control">
         <input class="input" type="text" name="depreciation_value" value="{{ $equipment->depreciation_value or old('depreciation_value') }}">
@@ -122,6 +150,13 @@
     <label class="label">Depreciation Note:</label>
     <div class="control">
         <input class="input" type="text" name="depreciation_note" value="{{ $equipment->depreciation_note or old('depreciation_note') }}">
+    </div>
+</div>
+
+<div class="field">
+    <label class="label">Account Asset Number:</label>
+    <div class="control">
+        <input class="input" type="text" name="account_asset_number" value="{{ $equipment->account_asset_number or old('account_asset_number') }}">
     </div>
 </div>
 
@@ -150,6 +185,27 @@
     <label class="label">Schematics Location:</label>
     <div class="control">
         <input class="input" type="text" name="schematics_location" value="{{ $equipment->schematics_location or old('schematics_location') }}">
+    </div>
+</div>
+
+<div class="field">
+    <label class="label">SizeX:</label>
+    <div class="control">
+        <input class="input" type="text" name="sizeX" value="{{ $equipment->sizeX or old('sizeX') }}">
+    </div>
+</div>
+
+<div class="field">
+    <label class="label">SizeY:</label>
+    <div class="control">
+        <input class="input" type="text" name="sizeY" value="{{ $equipment->sizeY or old('sizeY') }}">
+    </div>
+</div>
+
+<div class="field">
+    <label class="label">SizeZ:</label>
+    <div class="control">
+        <input class="input" type="text" name="sizeZ" value="{{ $equipment->sizeZ or old('sizeZ') }}">
     </div>
 </div>
 
