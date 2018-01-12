@@ -42,6 +42,10 @@ class EquipmentController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'number' => 'unique:equipment|max:10'
+        ]);
+
         $equipment = Equipment::create($request->all());
 
         return view('equipment.show', compact('equipment'));

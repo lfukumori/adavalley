@@ -5,7 +5,7 @@ use Faker\Generator as Faker;
 
 $factory->define(Equipment::class, function (Faker $faker) {
     return [
-        'name' => $faker->word,
+        'number' => $faker->numberBetween(1, 1000),
         'brand' => $faker->word,
         'model' => $faker->word,
         'serial_number' => $faker->ean8,
@@ -22,7 +22,6 @@ $factory->define(Equipment::class, function (Faker $faker) {
         'location' => "Room {$faker->numberBetween(1, 4)}",
         'manual_url' => "www.test.com/manuals.php",
         'procedures_location' => $faker->word,
-        'date_stored' => null,
         'service_by_days' => $faker->numberBetween(10, 90),
         'manual_file_location' => 'some location',
         'schematics_location' => 'another location',

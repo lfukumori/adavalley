@@ -32,7 +32,7 @@ class EquipmentTest extends TestCase
     /** 
      * Equipment knows its url route path.
      */
-    public function testPath()
+    public function test_path()
     {
         $urlRoute = "/equipment/{$this->equipment->id}";
 
@@ -42,7 +42,7 @@ class EquipmentTest extends TestCase
     /** 
      * Move equipment out of production to storage.
      */
-    public function testStore()
+    public function test_store()
     {
         $this->equipment->store();
 

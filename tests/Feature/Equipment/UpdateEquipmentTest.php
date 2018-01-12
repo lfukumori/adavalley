@@ -10,16 +10,19 @@ class UpdateEquipmentTest extends TestCase
 {
     use RefreshDatabase;
 
-    /** @test */
-    public function an_authenticated_user_can_update_equipment_details()
+    protected $equipment;
+
+    public function setUp()
     {
-        $this->signIn();
+        parent::setUp();
+        $this->equipment = create(Equipment::class);
+    }
 
-        $equipment = create(Equipment::class);
-        $updatedName = 'Updated Name';
+    /** @test */
+    public function only_authorized_users_can_update_equipment_details()
+    {
+        $response = $this->patch($this->equipment->path(), ['brand' => 'some brand']);
 
-        $this->patch("/equipment/{$equipment->id}", ['name' => $updatedName]);
-
-        $this->assertDatabaseHas('equipment', $equipment->fresh()->toArray());
+        $response->assertRedirect('/login');
     }
 }

@@ -18,8 +18,8 @@ class ViewEquipmentTest extends TestCase
         $equipment3 = create(Equipment::class);
 
         $this->get('/equipment')
-            ->assertSee($equipment1->name)
-            ->assertSee($equipment2->name)
-            ->assertSee($equipment3->name);
+            ->assertSee("{$equipment1->number}")
+            ->assertSee("{$equipment2->number}")
+            ->assertSee("{$equipment3->number}");
     }
 }
