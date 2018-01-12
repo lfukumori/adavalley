@@ -14,7 +14,7 @@
             <table class="table is-striped is-fullwidth">
                 <thead>
                     <tr>
-                        <th>Name</th>
+                        <th>Number</th></th>
                         <th>Brand</th>
                         <th>Model</th>
                     </tr>
@@ -22,7 +22,7 @@
                 <tbody>
                     @forelse($equipment as $e)
                         <tr>
-                            <td><a href="{{ route('equipment.show', $e->id) }}">{{ $e->name }}</a></td>
+                            <td><a href="{{ route('equipment.show', $e->id) }}">{{ $e->number }}</a></td>
                             <td>{{ $e->brand }}</td>
                             <td>{{ $e->model }}</td>
                         </tr>
