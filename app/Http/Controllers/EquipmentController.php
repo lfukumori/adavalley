@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Equipment;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 
 class EquipmentController extends Controller
 {
@@ -42,8 +43,24 @@ class EquipmentController extends Controller
      */
     public function store(Request $request)
     {
+        $date = new \DateTime;
+
         $request->validate([
-            'number' => 'unique:equipment|max:10'
+            "number" => "required|unique:equipment|alpha_num|max:10",
+            "brand" => "alpha_dash|max:50",
+            "model" => "alpha_dash|max:50",
+            "serial_number" => "alpha_dash|max:50",
+            "weight" => "numeric|min:0",
+            "purchase_date" => "before_or_equal:{$date->format('Ymd')}",
+            "purchase_value" => "numeric|min:0",
+            "depreciation_value" => "numeric|min:0",
+            "use_of_equipment" => "alpha_dash|max:100",
+            "manual_url" => "url",
+            "service_by_days" => "numeric|min:0",
+            "size_x" => "numeric|min:0",
+            "size_y" => "numeric|min:0",
+            "size_z" => "numeric|min:0",
+            "account_asset_number" => "alpha_dash|max:50"
         ]);
 
         $equipment = Equipment::create($request->all());

@@ -15,23 +15,22 @@ class CreateEquipmentTable extends Migration
     {
         Schema::create('equipment', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('number', 30)->nullable();
-            $table->string('brand', 30)->nullable();
-            $table->string('model', 30)->nullable();
-            $table->string('serial_number', 30)->nullable();
-            $table->string('description')->nullable();
-            $table->string('extended_description')->nullable();
+            $table->string('number', 10)->nullable();
+            $table->string('brand', 50)->nullable();
+            $table->string('model', 50)->nullable();
+            $table->string('serial_number', 50)->nullable();
+            $table->text('description')->nullable();
             $table->string('department')->nullable();
             $table->string('category')->nullable();
-            $table->integer('weight')->nullable();
+            $table->unsignedInteger('weight')->nullable();
             $table->date('purchase_date')->nullable();
-            $table->integer('purchase_value')->nullable();
-            $table->integer('depreciation_value')->nullable();
+            $table->unsignedInteger('purchase_value')->nullable();
+            $table->unsignedInteger('depreciation_value')->nullable();
             $table->string('depreciation_note')->nullable();
-            $table->string('depreciated_value')->nullable();
-            $table->integer('real_value')->nullable();
-            $table->integer('current_value')->nullable();
-            $table->string('use_of_equipment')->nullable();
+            $table->unsignedInteger('depreciated_value')->nullable();
+            $table->unsignedInteger('real_value')->nullable();
+            $table->unsignedInteger('current_value')->nullable();
+            $table->string('use_of_equipment', 100)->nullable();
             $table->boolean('active')->default(true);
             $table->string('location')->nullable();
             $table->string('manual_url')->nullable();
@@ -39,15 +38,14 @@ class CreateEquipmentTable extends Migration
             $table->string('procedures_location')->nullable();
             $table->string('schematics_location')->nullable();
             $table->date('date_removed')->nullable();
-            $table->integer('service_by_days')->nullable();
+            $table->unsignedInteger('service_by_days')->nullable();
             $table->string('status')->nullable();
-            $table->string('account_asset_number', 30)->nullable();
-            $table->string('sizeX')->nullable();
-            $table->string('sizeY')->nullable();
-            $table->string('sizeZ')->nullable();
+            $table->string('account_asset_number')->nullable();
+            $table->string('size_x')->nullable();
+            $table->string('size_y')->nullable();
+            $table->string('size_z')->nullable();
 
             $table->softDeletes();
-            
             $table->timestamps();
         });
     }
