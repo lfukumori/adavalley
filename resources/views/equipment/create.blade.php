@@ -8,7 +8,7 @@
 			<div class="column is-6-tablet is-offset-2">
 
 				<h2 class="title has-text-centered">Create Equipment</h2>
-
+				
 				@include("partials.errors")
 
 				<form method="POST" action="{{ url('/equipment') }}">

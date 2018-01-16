@@ -52,7 +52,7 @@
 <div class="field">
     <label class="label">Purchase Date:</label>
     <div class="control">
-        <input class="input" type="text" name="purchase_date" value="{{ $equipment->purchase_date or old('purchase_date') }}">
+        <input class="input" type="date" name="purchase_date" value="{{ $equipment->purchase_date or old('purchase_date') }}">
     </div>
 </div>
 
@@ -133,13 +133,6 @@
 </div>
 
 <div class="field">
-    <label class="label">Extended Description:</label>
-    <div class="control">
-        <input class="input" type="text" name="extended_description" value="{{ $equipment->extended_description or old('extended_description') }}">
-    </div>
-</div>
-
-<div class="field">
     <label class="label">Depreciation Value:</label>
     <div class="control">
         <input class="input" type="text" name="depreciation_value" value="{{ $equipment->depreciation_value or old('depreciation_value') }}">
@@ -163,7 +156,7 @@
 <div class="field">
     <label class="label">Date Removed:</label>
     <div class="control">
-        <input class="input" type="text" name="date_removed" value="{{ $equipment->date_removed or old('date_removed') }}">
+        <input class="input" type="date" name="date_removed" value="{{ $equipment->date_removed or old('date_removed') }}">
     </div>
 </div>
 

@@ -20,7 +20,7 @@ $factory->define(Equipment::class, function (Faker $faker) {
         'use_of_equipment' => $faker->sentence(),
         'status' => 'in use',
         'location' => "Room {$faker->numberBetween(1, 4)}",
-        'manual_url' => "www.test.com",
+        'manual_url' => "http://192.168.1.10/manuals",
         'procedures_location' => $faker->word,
         'service_by_days' => $faker->numberBetween(10, 90),
         'manual_file_location' => 'some location',
