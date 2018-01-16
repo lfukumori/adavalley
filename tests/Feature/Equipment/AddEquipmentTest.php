@@ -13,7 +13,7 @@ class AddEquipmentTest extends TestCase
 {
     use RefreshDatabase;
 
-    protected $equipment;
+    private $equipment;
 
     public function setUp()
     {
@@ -26,11 +26,10 @@ class AddEquipmentTest extends TestCase
     /** @test */
     public function only_signed_in_users_can_add_equipment()
     {
-        \Auth::logout();
+        \Auth::logout();\Auth::logout();
 
-        $response = $this->post('/equipment', $this->equipment->toArray());
-
-        $response->assertRedirect('/login');
+        $this->post('/equipment', $this->equipment->toArray())
+            ->assertRedirect('/login');
     }
 
     /** @test */
@@ -116,7 +115,7 @@ class AddEquipmentTest extends TestCase
     /** @test */
     public function equipment_serial_number_must_be_alpha_dash()
     {
-        $invalidSerialNumber = '<script>test</script>';
+        $invalidSerialNumber = 'test<script>';
         $equipment = make(Equipment::class, ['serial_number' => $invalidSerialNumber]);
 
         $this->post('/equipment', $equipment->toArray())
@@ -124,19 +123,19 @@ class AddEquipmentTest extends TestCase
     }
 
     /** @test */
-    public function equipment_weight_must_be_numeric()
+    public function equipment_weight_must_be_a_integer()
     {
-        $nonNumericWeight = '$1234';
-        $equipment = make(Equipment::class, ['weight' => $nonNumericWeight]);
+        $nonInteger = '1234lb';
+        $equipment = make(Equipment::class, ['weight' => $nonInteger]);
 
         $this->post('/equipment', $equipment->toArray())
             ->assertSessionHasErrors('weight');
     }
 
     /** @test */
-    public function equipment_weight_cannot_be_more_than_6_digits()
+    public function equipment_weight_cannot_be_more_than_4_digits()
     {
-        $sevenDigitWeight = '1234567';
+        $sevenDigitWeight = '12345';
         $equipment = make(Equipment::class, ['weight' => $sevenDigitWeight]);
 
         $this->post('/equipment', $equipment->toArray())
@@ -199,6 +198,21 @@ class AddEquipmentTest extends TestCase
     {
         $negativeNumericValue = '-100';
         $equipment = make(Equipment::class, ['depreciation_amount' => $negativeNumericValue]);
+
+        $this->post('/equipment', $equipment->toArray())
+            ->assertSessionHasErrors('depreciation_amount');
+    }
+
+    /** @test */
+    public function equipment_depreciation_amount_must_be_less_than_the_purchase_value()
+    {
+        $purchaseValue = 1;
+        $tooHighDepreciationAmount = 2;
+
+        $equipment = make(Equipment::class, [
+            'purchase_value' => $purchaseValue,
+            'depreciation_amount' => $tooHighDepreciationAmount
+        ]);
 
         $this->post('/equipment', $equipment->toArray())
             ->assertSessionHasErrors('depreciation_amount');

@@ -21,7 +21,7 @@ class CreateEquipmentTable extends Migration
             $table->string('serial_number', 50)->nullable();
             $table->text('description')->nullable();
             $table->unsignedInteger('weight')->nullable();
-            $table->unsignedInteger('purchase_value')->nullable();
+            $table->string('purchase_value', 20)->nullable();
             $table->date('purchase_date')->nullable();
             $table->unsignedInteger('depreciation_amount')->nullable();
             $table->string('depreciation_note', 255)->nullable();
