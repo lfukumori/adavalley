@@ -1,5 +1,7 @@
 <?php
 
+use Tests\Feature\Equipment\AddEquipmentTest;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -10,6 +12,18 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+Route::get('/tests', function() {
+    $tests = preg_grep('/^equipment/', get_class_methods(new \Tests\Feature\Equipment\AddEquipmentTest));
+
+    $response = "<ol>";
+
+    foreach ($tests as $test) {
+        $response .= "<li>{$test}</li>";
+    }
+
+    return $response . "</ol>";
+});
 
 Route::get('/', 'HomeController@index');
 

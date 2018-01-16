@@ -46,7 +46,7 @@ class EquipmentController extends Controller
         $today = new \DateTime;
       
         $request->validate([
-            "number"                => "required|unique:equipment|alpha_num|max:10",
+            "number"                => "required|unique:equipment|alpha_num|max:6",
             "brand"                 => "alpha_dash|max:50",
             "model"                 => "alpha_dash|max:50",
             "serial_number"         => "alpha_dash|max:50",

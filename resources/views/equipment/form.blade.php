@@ -29,23 +29,16 @@
 </div>
 
 <div class="field">
+    <label class="label">Description:</label>
+    <div class="control">
+        <input class="input" type="text" name="description" value="{{ $equipment->description or old('description') }}">
+    </div>
+</div>
+
+<div class="field">
     <label class="label">Weight:</label>
     <div class="control">
-        <input class="input" type="text" name="weight" value="{{ $equipment->weight or old('weight') }}">
-    </div>
-</div>
-
-<div class="field">
-    <label class="label">Department:</label>
-    <div class="control">
-        <input class="input" type="text" name="department" value="{{ $equipment->department or old('department') }}">
-    </div>
-</div>
-
-<div class="field">
-    <label class="label">Category:</label>
-    <div class="control">
-        <input class="input" type="text" name="category" value="{{ $equipment->category or old('category') }}">
+        <input class="input" type="number" name="weight" value="{{ $equipment->weight or old('weight') }}">
     </div>
 </div>
 
@@ -64,78 +57,9 @@
 </div>
 
 <div class="field">
-    <label class="label">Depreciated Value:</label>
+    <label class="label">Depreciation Amount:</label>
     <div class="control">
-        <input class="input" type="text" name="depreciated_value" value="{{ $equipment->depreciated_value or old('depreciated_value') }}">
-    </div>
-</div>
-
-<div class="field">
-    <label class="label">Real Value:</label>
-    <div class="control">
-        <input class="input" type="text" name="real_value" value="{{ $equipment->real_value or old('real_value') }}">
-    </div>
-</div>
-
-<div class="field">
-    <label class="label">Current Value:</label>
-    <div class="control">
-        <input class="input" type="text" name="current_value" value="{{ $equipment->current_value or old('current_value') }}">
-    </div>
-</div>
-
-<div class="field">
-    <label class="label">Use of Equipment:</label>
-    <div class="control">
-        <input class="input" type="text" name="use_of_equipment" value="{{ $equipment->use_of_equipment or old('use_of_equipment') }}">
-    </div>
-</div>
-
-<div class="field">
-    <label class="label">Active:</label>
-    <div class="control">
-        <div class="select">
-            <select>
-                <option>{{ $equipment->active or old('active') }}</option>
-                <option value="1">True</option>
-                <option value="0">False</option>
-            </select>
-        </div>
-    </div>
-</div>
-
-<div class="field">
-    <label class="label">Location:</label>
-    <div class="control">
-        <input class="input" type="text" name="location" value="{{ $equipment->location or old('location') }}">
-    </div>
-</div>
-
-<div class="field">
-    <label class="label">Manual Url:</label>
-    <div class="control">
-        <input class="input" type="text" name="manual_url" value="{{ $equipment->manual_url or old('manual_url') }}">
-    </div>
-</div>
-
-<div class="field">
-    <label class="label">Procedures Location:</label>
-    <div class="control">
-        <input class="input" type="text" name="procedures_location" value="{{ $equipment->procedures_location or old('procedures_location') }}">
-    </div>
-</div>
-
-<div class="field">
-    <label class="label">Description:</label>
-    <div class="control">
-        <input class="input" type="text" name="description" value="{{ $equipment->description or old('description') }}">
-    </div>
-</div>
-
-<div class="field">
-    <label class="label">Depreciation Value:</label>
-    <div class="control">
-        <input class="input" type="text" name="depreciation_value" value="{{ $equipment->depreciation_value or old('depreciation_value') }}">
+        <input class="input" type="text" name="depreciation_amount" value="{{ $equipment->depreciation_amount or old('depreciation_amount') }}">
     </div>
 </div>
 
@@ -147,37 +71,80 @@
 </div>
 
 <div class="field">
-    <label class="label">Account Asset Number:</label>
+    <label class="label">Use of Equipment:</label>
     <div class="control">
-        <input class="input" type="text" name="account_asset_number" value="{{ $equipment->account_asset_number or old('account_asset_number') }}">
+        <input class="input" type="text" name="use_of_equipment" value="{{ $equipment->use_of_equipment or old('use_of_equipment') }}">
     </div>
 </div>
 
 <div class="field">
-    <label class="label">Date Removed:</label>
+    <label class="label">Status:</label>
     <div class="control">
-        <input class="input" type="date" name="date_removed" value="{{ $equipment->date_removed or old('date_removed') }}">
+        <div class="select">
+            <select name="status">
+                <option>{{ $equipment->status or old('status') }}</option>
+                <option value="active">Active</option>
+                <option value="inactive">Inactive</option>
+                <option value="stored">Stored</option>
+            </select>
+        </div>
     </div>
 </div>
 
 <div class="field">
-    <label class="label">Service by Days:</label>
+    <label class="label">Manual Url:</label>
     <div class="control">
-        <input class="input" type="text" name="service_by_days" value="{{ $equipment->service_by_days or old('service_by_days') }}">
+        <input class="input" type="text" name="manual_url" value="{{ $equipment->manual_url or old('manual_url') }}">
     </div>
 </div>
 
 <div class="field">
-    <label class="label">Manual File Location:</label>
+    <label class="label">Paper Manual Location:</label>
     <div class="control">
-        <input class="input" type="text" name="manual_file_location" value="{{ $equipment->manual_file_location or old('manual_file_location') }}">
+        <div class="select">
+            <select name="status">
+                <option>{{ $equipment->manual_file_location or old('manual_file_location') }}</option>
+                <option value="Filing Cabinet">Manual Filing Cabinet</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+<div class="field">
+    <label class="label">Procedures Location:</label>
+    <div class="control">
+        <div class="select">
+            <select name="status">
+                <option>{{ $equipment->procedures_location or old('procedures_location') }}</option>
+                <option value="Filing Cabinet">Procedures Filing Cabinet</option>
+            </select>
+        </div>
     </div>
 </div>
 
 <div class="field">
     <label class="label">Schematics Location:</label>
     <div class="control">
-        <input class="input" type="text" name="schematics_location" value="{{ $equipment->schematics_location or old('schematics_location') }}">
+        <div class="select">
+            <select name="status">
+                <option>{{ $equipment->schematics_location or old('schematics_location') }}</option>
+                <option value="Filing Cabinet">Schematics Filing Cabinet</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+<div class="field">
+    <label class="label">Service by Days:</label>
+    <div class="control">
+        <input class="input" type="number" max="365" min="1" name="service_by_days" value="{{ $equipment->service_by_days or old('service_by_days') }}">
+    </div>
+</div>
+
+<div class="field">
+    <label class="label">Account Asset Number:</label>
+    <div class="control">
+        <input class="input" type="text" name="account_asset_number" value="{{ $equipment->account_asset_number or old('account_asset_number') }}">
     </div>
 </div>
 

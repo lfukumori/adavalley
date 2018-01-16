@@ -124,7 +124,7 @@ class AddEquipmentTest extends TestCase
     }
 
     /** @test */
-    public function equipment_weight_must_be_a_numeric()
+    public function equipment_weight_must_be_numeric()
     {
         $invalidWeight = '$1234';
         $equipment = make(Equipment::class, ['weight' => $invalidWeight]);
@@ -225,7 +225,7 @@ class AddEquipmentTest extends TestCase
     }
 
     /** @test */
-    public function equipment_service_by_days_must_be_a_numeric_value()
+    public function equipment_service_by_days_must_be_numeric_value()
     {
         $invalidNumericalValue = 'e100';
         $equipment = make(Equipment::class, ['service_by_days' => $invalidNumericalValue]);
@@ -265,7 +265,7 @@ class AddEquipmentTest extends TestCase
     }
 
     /** @test */
-    public function equipment_size_x_must_be_a_numeric_value()
+    public function equipment_size_x_must_be_numeric_value()
     {
         $invalidNumericValue = 'e100';
         $equipment = make(Equipment::class, ['size_x' => $invalidNumericValue]);
@@ -285,7 +285,7 @@ class AddEquipmentTest extends TestCase
     }
 
     /** @test */
-    public function equipment_size_y_must_be_a_numeric_value()
+    public function equipment_size_y_must_be_numeric_value()
     {
         $invalidNumericValue = 'e100';
         $equipment = make(Equipment::class, ['size_y' => $invalidNumericValue]);
@@ -305,7 +305,7 @@ class AddEquipmentTest extends TestCase
     }
 
     /** @test */
-    public function equipment_size_z_must_be_a_numeric_value()
+    public function equipment_size_z_must_be_numeric_value()
     {
         $invalidNumericValue = '$100';
         $equipment = make(Equipment::class, ['size_z' => $invalidNumericValue]);
