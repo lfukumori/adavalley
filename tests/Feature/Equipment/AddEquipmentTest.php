@@ -126,18 +126,28 @@ class AddEquipmentTest extends TestCase
     /** @test */
     public function equipment_weight_must_be_numeric()
     {
-        $invalidWeight = '$1234';
-        $equipment = make(Equipment::class, ['weight' => $invalidWeight]);
+        $nonNumericWeight = '$1234';
+        $equipment = make(Equipment::class, ['weight' => $nonNumericWeight]);
 
         $this->post('/equipment', $equipment->toArray())
             ->assertSessionHasErrors('weight');
     }
 
     /** @test */
-    public function equipment_weight_must_be_a_positive_value()
+    public function equipment_weight_cannot_be_more_than_6_digits()
     {
-        $invalidWeight = '-100';
-        $equipment = make(Equipment::class, ['weight' => $invalidWeight]);
+        $sevenDigitWeight = '1234567';
+        $equipment = make(Equipment::class, ['weight' => $sevenDigitWeight]);
+
+        $this->post('/equipment', $equipment->toArray())
+            ->assertSessionHasErrors('weight');
+    }
+
+    /** @test */
+    public function equipment_weight_cannot_be_negative()
+    {
+        $negativeWeight = '-100';
+        $equipment = make(Equipment::class, ['weight' => $negativeWeight]);
 
         $this->post('/equipment', $equipment->toArray())
             ->assertSessionHasErrors('weight');
@@ -175,23 +185,23 @@ class AddEquipmentTest extends TestCase
     }
 
     /** @test */
-    public function equipment_depreciation_value_must_be_numeric()
+    public function equipment_depreciation_amount_must_be_numeric()
     {
         $nonNumericValue = '$100';
-        $equipment = make(Equipment::class, ['depreciation_value' => $nonNumericValue]);
+        $equipment = make(Equipment::class, ['depreciation_amount' => $nonNumericValue]);
 
         $this->post('/equipment', $equipment->toArray())
-            ->assertSessionHasErrors('depreciation_value');
+            ->assertSessionHasErrors('depreciation_amount');
     }
 
     /** @test */
-    public function equipment_depreciation_value_must_be_a_positive_value()
+    public function equipment_depreciation_amount_must_be_a_positive_value()
     {
         $negativeNumericValue = '-100';
-        $equipment = make(Equipment::class, ['depreciation_value' => $negativeNumericValue]);
+        $equipment = make(Equipment::class, ['depreciation_amount' => $negativeNumericValue]);
 
         $this->post('/equipment', $equipment->toArray())
-            ->assertSessionHasErrors('depreciation_value');
+            ->assertSessionHasErrors('depreciation_amount');
     }
 
     /** @test */
