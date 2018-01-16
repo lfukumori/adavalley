@@ -2,6 +2,7 @@
 
 namespace Tests\Unit;
 
+use App\Department;
 use App\Equipment;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -47,5 +48,17 @@ class EquipmentTest extends TestCase
         $this->equipment->store();
 
         $this->assertSoftDeleted('equipment', $this->equipment->toArray());
+    }
+
+    /**
+     * A piece of equipment belongs to a department
+     */
+    public function test_department()
+    {
+        $department = new Department(['name' => 'Room1']);
+
+        $this->equipment->department()->associate($department);
+
+        $this->assertInstanceOf(Department::class, $this->equipment->department);
     }
 }

@@ -2,11 +2,9 @@
 
 namespace Tests\Feature\Equipment;
 
-use Carbon\Carbon;
 use App\Equipment;
 use App\User;
 use Tests\TestCase;
-use Illuminate\Validation\ValidationException;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class AddEquipmentTest extends TestCase
