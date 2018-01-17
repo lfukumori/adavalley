@@ -151,21 +151,21 @@
 <div class="field">
     <label class="label">SizeX:</label>
     <div class="control">
-        <input class="input" type="text" name="sizeX" value="{{ $equipment->sizeX or old('sizeX') }}">
+        <input class="input" type="text" name="size_x" value="{{ $equipment->sizeX or old('sizeX') }}">
     </div>
 </div>
 
 <div class="field">
     <label class="label">SizeY:</label>
     <div class="control">
-        <input class="input" type="text" name="sizeY" value="{{ $equipment->sizeY or old('sizeY') }}">
+        <input class="input" type="text" name="size_y" value="{{ $equipment->sizeY or old('sizeY') }}">
     </div>
 </div>
 
 <div class="field">
     <label class="label">SizeZ:</label>
     <div class="control">
-        <input class="input" type="text" name="sizeZ" value="{{ $equipment->sizeZ or old('sizeZ') }}">
+        <input class="input" type="text" name="size_z" value="{{ $equipment->sizeZ or old('sizeZ') }}">
     </div>
 </div>
 
