@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\Equipment;
 
+use App\Department;
 use App\Equipment;
 use App\User;
 use Tests\TestCase;
@@ -344,5 +345,17 @@ class AddEquipmentTest extends TestCase
 
         $this->post('/equipment', $equipment->toArray())
             ->assertSessionHasErrors('size_z');
+    }
+
+    /** @test */
+    public function equipment_department_must_be_valid()
+    {
+        $departmentOne = create(Department::class);
+        $departmentTwo = create(Department::class);
+
+        $equipment = make(Equipment::class, ['department_id' => 1999]);
+
+        $this->post('/equipment', $equipment->toArray())
+            ->assertSessionHasErrors('department_id');
     }
 }

@@ -50,7 +50,7 @@ class EquipmentController extends Controller
             "brand"                 => "alpha_dash|max:50",
             "model"                 => "alpha_dash|max:50",
             "serial_number"         => "alpha_dash|max:50",
-            "description"           => "alpha_dash|nullable",
+            "description"           => "nullable",
             "weight"                => "integer|digits_between:0,4",
             "purchase_date"         => "date|before_or_equal:{$today->format('Ymd')}",
             "purchase_value"        => "numeric|min:0|nullable",
@@ -61,7 +61,8 @@ class EquipmentController extends Controller
             "size_x"                => "numeric|min:0",
             "size_y"                => "numeric|min:0",
             "size_z"                => "numeric|min:0",
-            "account_asset_number"  => "alpha_dash|max:50|nullable"
+            "account_asset_number"  => "alpha_dash|max:50|nullable",
+            "department_id"         => "exist:departments,id"
         ]);
 
         $equipment = Equipment::create($request->all());
