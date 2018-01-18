@@ -55,14 +55,14 @@ class EquipmentController extends Controller
             "purchase_date"         => "date|before_or_equal:{$today->format('Ymd')}",
             "purchase_value"        => "numeric|min:0|nullable",
             "depreciation_amount"   => "numeric|min:0|max:{$request['purchase_value']}|nullable",
-            "use_of_equipment"      => "alpha_dash|max:100",
+            "use_of_equipment"      => "max:100|nullable",
             "manual_url"            => "url|nullable",
-            "service_by_days"       => "numeric|min:0|max:365",
+            "service_by_days"       => "integer|between:0,365",
             "size_x"                => "numeric|min:0",
             "size_y"                => "numeric|min:0",
             "size_z"                => "numeric|min:0",
             "account_asset_number"  => "alpha_dash|max:50|nullable",
-            "department_id"         => "exist:departments,id"
+            "department_id"         => "exists:departments,id"
         ]);
 
         $equipment = Equipment::create($request->all());
