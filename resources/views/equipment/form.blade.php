@@ -137,7 +137,7 @@
 <div class="field">
     <label class="label">Service by Days:</label>
     <div class="control">
-        <input class="input" type="number" max="365" min="1" name="service_by_days" value="{{ $equipment->service_by_days or old('service_by_days') }}">
+        <input class="input" type="number" min="1" max="365" name="service_by_days" value="{{ $equipment->service_by_days or old('service_by_days') }}">
     </div>
 </div>
 

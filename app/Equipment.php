@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Department;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -26,5 +27,10 @@ class Equipment extends Model
     public function store()
     {
         $this->delete();
+    }
+
+    public function department()
+    {
+        return $this->belongsTo(Department::class);
     }
 }
