@@ -16,7 +16,7 @@ class EquipmentTest extends TestCase
      *
      * @var \App\Equipment
      */
-    protected $equipment;
+    private $equipment;
 
     /**
      * Set up test enviroment.
@@ -34,7 +34,7 @@ class EquipmentTest extends TestCase
      * Equipment knows its url route path.
      */
     public function test_path()
-    {
+    {   
         $urlRoute = "/equipment/{$this->equipment->id}";
 
         $this->assertEquals($urlRoute, $this->equipment->path());
@@ -55,9 +55,9 @@ class EquipmentTest extends TestCase
      */
     public function test_department()
     {
-        $department = new Department(['name' => 'Room1']);
+        $department = create(Department::class);
 
-        $this->equipment->department()->associate($department);
+        $this->equipment->moveToDepartment($department);
 
         $this->assertInstanceOf(Department::class, $this->equipment->department);
     }

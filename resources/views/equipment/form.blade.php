@@ -92,6 +92,23 @@
 </div>
 
 <div class="field">
+    <label class="label">Department:</label>
+    <div class="control">
+        <div class="select">
+            <select name="department_id">
+                <option>{{ $equipment->department_id or old('department_id') }}</option>
+                <option value="1">Room 1</option>
+                <option value="2">Room 2</option>
+                <option value="3">Room 3</option>
+                <option value="4">Room 4</option>
+                <option value="5">Room 5</option>
+                <option value="6">Room 6</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+<div class="field">
     <label class="label">Manual Url:</label>
     <div class="control">
         <input class="input" type="text" name="manual_url" value="{{ $equipment->manual_url or old('manual_url') }}">
@@ -102,7 +119,7 @@
     <label class="label">Paper Manual Location:</label>
     <div class="control">
         <div class="select">
-            <select name="status">
+            <select name="manual_file_location">
                 <option>{{ $equipment->manual_file_location or old('manual_file_location') }}</option>
                 <option value="Filing Cabinet">Manual Filing Cabinet</option>
             </select>
@@ -114,7 +131,7 @@
     <label class="label">Procedures Location:</label>
     <div class="control">
         <div class="select">
-            <select name="status">
+            <select name="procedures_location">
                 <option>{{ $equipment->procedures_location or old('procedures_location') }}</option>
                 <option value="Filing Cabinet">Procedures Filing Cabinet</option>
             </select>
@@ -126,7 +143,7 @@
     <label class="label">Schematics Location:</label>
     <div class="control">
         <div class="select">
-            <select name="status">
+            <select name="schematics_location">
                 <option>{{ $equipment->schematics_location or old('schematics_location') }}</option>
                 <option value="Filing Cabinet">Schematics Filing Cabinet</option>
             </select>

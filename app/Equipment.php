@@ -33,4 +33,9 @@ class Equipment extends Model
     {
         return $this->belongsTo(Department::class);
     }
+
+    public function moveToDepartment(Department $department)
+    {
+        $this->department()->associate($department);
+    }
 }

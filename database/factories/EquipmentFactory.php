@@ -1,9 +1,14 @@
 <?php
 
+use App\Department;
 use App\Equipment;
 use Faker\Generator as Faker;
 
 $factory->define(Equipment::class, function (Faker $faker) {
+    if (is_null($department = Department::first())) {
+        $department = new Department(['name' => 'Room 1']);
+    }
+
     return [
         'number'                => $faker->numberBetween(1, 99999),
         'brand'                 => $faker->word,
@@ -25,6 +30,7 @@ $factory->define(Equipment::class, function (Faker $faker) {
         'account_asset_number'  => $faker->ean13,
         'size_x'                => $faker->numberBetween(1, 1000),
         'size_y'                => $faker->numberBetween(1, 1000),
-        'size_z'                => $faker->numberBetween(1, 1000)
+        'size_z'                => $faker->numberBetween(1, 1000),
+        'department_id'         => $department->id
     ];
 });

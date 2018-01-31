@@ -298,14 +298,17 @@ class AddEquipmentTest extends TestCase
     }
 
     /** @test */
-    public function equipment_department_must_exist()
+    public function equipment_department_must_exist_in_database()
     {
         $departmentId = 'department_id';
-        create(Department::class);
-        create(Department::class);
+        $validDepartmentId = (create(Department::class))->id;
+        $inValidDepartmentId = 100;
 
-        $this->createEquipment([$departmentId => 999])
+        $this->createEquipment([$departmentId => $inValidDepartmentId])
             ->assertSessionHasErrors($departmentId);
+
+        $this->createEquipment([$departmentId => $validDepartmentId])
+            ->assertSessionMissing($departmentId);
     }
 
     private function createEquipment($overrides = [])
