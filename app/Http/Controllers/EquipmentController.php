@@ -15,7 +15,7 @@ class EquipmentController extends Controller
     {
         $this->middleware('auth')->except(['index', 'show']);
     }
-    
+
     /**
      * Display a listing of the resource.
      *
@@ -43,7 +43,7 @@ class EquipmentController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(PurchaseEquipmentRequest $request)
-    {   
+    {
         $equipment = Equipment::create($request->validate());
 
         return view('equipment.show', compact('equipment'));
@@ -78,9 +78,9 @@ class EquipmentController extends Controller
      * @param  \App\Equipment  $equipment
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Equipment $equipment)
+    public function update(PurchaseEquipmentRequest $request, Equipment $equipment)
     {
-        $equipment->update($request->all());
+        $equipment->update($request->validate());
 
         return view('equipment.show', compact('equipment'));
     }
