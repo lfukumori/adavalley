@@ -82,13 +82,15 @@
     <div class="control">
         <div class="select">
             <select name="status_id">
-                @foreach ($statuses as $status)
-                    @if (old('status_id') == $status->id)
-                        <option value="{{ $status->id }}" selected>{{ $status->name }}</option>
+                @foreach($statuses as $status)
+
+                    @if(old('status_id', $equipment->status_id) == $status->id)
+                        <option value="{{ $status->id }}" selected >{{ $status->name }}</option>
                     @else
                         <option value="{{ $status->id }}">{{ $status->name }}</option>
                     @endif
-                @endforeach
+                    
+                @endforeach 
             </select>
         </div>
     </div>

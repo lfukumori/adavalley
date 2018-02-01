@@ -22,9 +22,7 @@ class EquipmentController extends Controller
      */
     public function index()
     {
-        $equipment = Equipment::all();
-
-        return view('equipment.index', compact('equipment'));
+        return view('equipment.index');
     }
 
     /**
@@ -34,10 +32,7 @@ class EquipmentController extends Controller
      */
     public function create()
     {
-        return view('equipment.create', [
-            "departments"   => Department::all(),
-            "statuses"      => Status::all()
-        ]);
+        return view('equipment.create');
     }
 
     /**
