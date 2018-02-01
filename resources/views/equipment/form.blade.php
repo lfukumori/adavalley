@@ -108,7 +108,7 @@
             <select name="department_id">
                 <option value="">Select A Department</option>
                 @foreach ($departments as $department)
-                    @if (old('department_id') == $department->id)
+                    @if (old('department_id', $equipment->department_id) == $department->id)
                         <option value="{{ $department->id }}" selected>{{ $department->name }}</option>
                     @else
                         <option value="{{ $department->id }}">{{ $department->name }}</option>

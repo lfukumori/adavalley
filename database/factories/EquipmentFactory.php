@@ -7,7 +7,7 @@ use Faker\Generator as Faker;
 
 $factory->define(Equipment::class, function (Faker $faker) {
     if (is_null($department = Department::first())) {
-        $department = factory(Department::class)->create();
+        $department = factory(Department::class)->create(['name' => 'Room 1']);
     }
 
     if (is_null($status = Status::first())) {
