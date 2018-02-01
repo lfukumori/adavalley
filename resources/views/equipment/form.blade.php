@@ -88,14 +88,13 @@
     <div class="control">
         <div class="select">
             <select name="status_id">
+                <option value="">Select A Status</option>
                 @foreach($statuses as $status)
-
                     @if(old('status_id', $equipment->status_id) == $status->id)
                         <option value="{{ $status->id }}" selected >{{ $status->name }}</option>
                     @else
                         <option value="{{ $status->id }}">{{ $status->name }}</option>
                     @endif
-                    
                 @endforeach 
             </select>
         </div>
@@ -107,6 +106,7 @@
     <div class="control">
         <div class="select">
             <select name="department_id">
+                <option value="">Select A Department</option>
                 @foreach ($departments as $department)
                     @if (old('department_id') == $department->id)
                         <option value="{{ $department->id }}" selected>{{ $department->name }}</option>
