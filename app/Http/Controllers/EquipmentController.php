@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Status;
 use App\Equipment;
+use App\Department;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 
@@ -32,7 +34,10 @@ class EquipmentController extends Controller
      */
     public function create()
     {
-        return view('equipment.create');
+        return view('equipment.create', [
+            "departments"   => Department::all(),
+            "statuses"      => Status::all()
+        ]);
     }
 
     /**

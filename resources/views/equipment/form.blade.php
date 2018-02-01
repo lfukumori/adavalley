@@ -82,10 +82,13 @@
     <div class="control">
         <div class="select">
             <select name="status_id">
-                <option>{{ $equipment->status_id or old('status_id') }}</option>
-                <option value="1">Active</option>
-                <option value="2">Inactive</option>
-                <option value="3">Stored</option>
+                @foreach ($statuses as $status)
+                    @if (old('status_id') == $status->id)
+                        <option value="{{ $status->id }}" selected>{{ $status->name }}</option>
+                    @else
+                        <option value="{{ $status->id }}">{{ $status->name }}</option>
+                    @endif
+                @endforeach
             </select>
         </div>
     </div>
@@ -96,13 +99,13 @@
     <div class="control">
         <div class="select">
             <select name="department_id">
-                <option>{{ $equipment->department_id or old('department_id') }}</option>
-                <option value="1">Room 1</option>
-                <option value="2">Room 2</option>
-                <option value="3">Room 3</option>
-                <option value="4">Room 4</option>
-                <option value="5">Room 5</option>
-                <option value="6">Room 6</option>
+                @foreach ($departments as $department)
+                    @if (old('department_id') == $department->id)
+                        <option value="{{ $department->id }}" selected>{{ $department->name }}</option>
+                    @else
+                        <option value="{{ $department->id }}">{{ $department->name }}</option>
+                    @endif
+                @endforeach
             </select>
         </div>
     </div>
