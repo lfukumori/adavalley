@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Equipment;
+use App\Department;
 use Illuminate\Database\Eloquent\Model;
 
 class Department extends Model

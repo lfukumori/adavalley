@@ -7,7 +7,7 @@ use App\Department;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
-class AddEquipmentTest extends TestCase
+class PurchaseEquipmentTest extends TestCase
 {
     use RefreshDatabase;
 
