@@ -14,9 +14,9 @@ use Tests\Feature\Equipment\AddEquipmentTest;
 */
 
 Route::get('/tests', function() {
-    $tests = preg_grep('/^equipment/', get_class_methods(new \Tests\Feature\Equipment\AddEquipmentTest));
+    $tests = preg_grep('/^equipment/', get_class_methods(new \Tests\Feature\Equipment\PurchaseEquipmentTest));
 
-    $response = "<ol>";
+    $response = "<h3>Purchasing Equipment</h3><ol>";
 
     foreach ($tests as $test) {
         $response .= "<li>{$test}</li>";
