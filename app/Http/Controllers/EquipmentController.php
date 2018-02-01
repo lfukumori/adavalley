@@ -7,6 +7,7 @@ use App\Equipment;
 use App\Department;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
+use App\Http\Requests\PurchaseEquipmentRequest;
 
 class EquipmentController extends Controller
 {
@@ -38,35 +39,12 @@ class EquipmentController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\PurchaseEquipmentRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        $today = new \DateTime;
-      
-        $request->validate([
-            "number"                => "required|unique:equipment|alpha_num|max:6",
-            "brand"                 => "alpha_dash|max:50",
-            "model"                 => "alpha_dash|max:50",
-            "serial_number"         => "alpha_dash|max:50",
-            "description"           => "nullable",
-            "weight"                => "integer|digits_between:0,4",
-            "purchase_date"         => "date|before_or_equal:{$today->format('Ymd')}",
-            "purchase_value"        => "numeric|min:0|nullable",
-            "depreciation_amount"   => "numeric|min:0|max:{$request['purchase_value']}|nullable",
-            "use_of_equipment"      => "max:100|nullable",
-            "manual_url"            => "url|nullable",
-            "service_by_days"       => "integer|between:0,365",
-            "size_x"                => "numeric|min:0",
-            "size_y"                => "numeric|min:0",
-            "size_z"                => "numeric|min:0",
-            "account_asset_number"  => "alpha_dash|max:50|nullable",
-            "department_id"         => "exists:departments,id",
-            "status_id"             => "exists:statuses,id"
-        ]);
-
-        $equipment = Equipment::create($request->all());
+    public function store(PurchaseEquipmentRequest $request)
+    {   
+        $equipment = Equipment::create($request->validate());
 
         return view('equipment.show', compact('equipment'));
     }

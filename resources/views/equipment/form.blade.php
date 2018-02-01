@@ -45,7 +45,13 @@
 <div class="field">
     <label class="label">Purchase Date:</label>
     <div class="control">
-        <input class="input" type="date" name="purchase_date" value="{{ $equipment->purchase_date or old('purchase_date') }}">
+        @if (! is_null(old('purchase_date')))
+            <input class="input" type="date" name="purchase_date" value=" {{ old('purchase_date') }}">
+        @elseif (! is_null($equipment->purchase_date))
+            <input class="input" type="date" name="purchase_date" value="{{ $equipment->purchase_date }}">
+        @else
+            <input class="input" type="date" name="purchase_date" value="{{ date('Y-m-d') }}">
+        @endif
     </div>
 </div>
 
