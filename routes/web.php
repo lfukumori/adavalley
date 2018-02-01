@@ -14,7 +14,7 @@ use Tests\Feature\Equipment\AddEquipmentTest;
 */
 
 Route::get('/tests', function() {
-    $tests = preg_grep('/^equipment/', get_class_methods(new \Tests\Feature\Equipment\AddEquipmentTest));
+    $tests = preg_grep('/^equipment/', get_class_methods(new \Tests\Feature\Equipment\PurchaseEquipmentTest));
 
     $response = "<ol>";
 

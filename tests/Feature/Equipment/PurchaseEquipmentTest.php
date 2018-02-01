@@ -22,7 +22,7 @@ class PurchaseEquipmentTest extends TestCase
     }
     
     /** @test */
-    public function only_signed_in_users_can_add_equipment()
+    public function only_signed_in_users_can_purchase_equipment()
     {
         \Auth::logout();\Auth::logout();
 
