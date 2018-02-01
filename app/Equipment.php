@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Status;
 use App\Department;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -32,6 +33,11 @@ class Equipment extends Model
     public function department()
     {
         return $this->belongsTo(Department::class);
+    }
+
+    public function status()
+    {
+        return $this->belongsTo(Status::class, 'id', 'status_id');
     }
 
     public function moveToDepartment(Department $department)

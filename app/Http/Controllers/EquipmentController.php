@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Status;
 use App\Equipment;
+use App\Department;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 
@@ -20,9 +22,7 @@ class EquipmentController extends Controller
      */
     public function index()
     {
-        $equipment = Equipment::all();
-
-        return view('equipment.index', compact('equipment'));
+        return view('equipment.index');
     }
 
     /**
@@ -62,7 +62,8 @@ class EquipmentController extends Controller
             "size_y"                => "numeric|min:0",
             "size_z"                => "numeric|min:0",
             "account_asset_number"  => "alpha_dash|max:50|nullable",
-            "department_id"         => "exists:departments,id"
+            "department_id"         => "exists:departments,id",
+            "status_id"             => "exists:statuses,id"
         ]);
 
         $equipment = Equipment::create($request->all());
