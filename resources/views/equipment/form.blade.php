@@ -81,11 +81,11 @@
     <label class="label">Status:</label>
     <div class="control">
         <div class="select">
-            <select name="status">
-                <option>{{ $equipment->status or old('status') }}</option>
-                <option value="active">Active</option>
-                <option value="inactive">Inactive</option>
-                <option value="stored">Stored</option>
+            <select name="status_id">
+                <option>{{ $equipment->status_id or old('status_id') }}</option>
+                <option value="1">Active</option>
+                <option value="2">Inactive</option>
+                <option value="3">Stored</option>
             </select>
         </div>
     </div>

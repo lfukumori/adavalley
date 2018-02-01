@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\Equipment;
 
+use App\Status;
 use App\Equipment;
 use App\Department;
 use Tests\TestCase;
@@ -309,6 +310,20 @@ class PurchaseEquipmentTest extends TestCase
 
         $this->createEquipment([$departmentId => $validDepartmentId])
             ->assertSessionMissing($departmentId);
+    }
+
+    /** @test */
+    public function equipment_status_must_exist_in_database()
+    {
+        $statusId = 'status_id';
+        $validStatusId = (create(Status::class))->id;
+        $inValidStatusId = 100;
+
+        $this->createEquipment([$statusId => $inValidStatusId])
+            ->assertSessionHasErrors($statusId);
+
+        $this->createEquipment([$statusId => $validStatusId])
+            ->assertSessionMissing($statusId);
     }
 
     private function createEquipment($overrides = [])

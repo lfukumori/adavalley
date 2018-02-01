@@ -1,12 +1,17 @@
 <?php
 
+use App\Status;
 use App\Department;
 use App\Equipment;
 use Faker\Generator as Faker;
 
 $factory->define(Equipment::class, function (Faker $faker) {
     if (is_null($department = Department::first())) {
-        $department = new Department(['name' => 'Room 1']);
+        $department = factory(Department::class)->create();
+    }
+
+    if (is_null($status = Status::first())) {
+        $status = factory(Status::class)->create(['name' => 'Active']);
     }
 
     return [
@@ -21,7 +26,6 @@ $factory->define(Equipment::class, function (Faker $faker) {
         'depreciation_amount'   => $faker->numberBetween(1, 100),
         'depreciation_note'     => $faker->sentence(),
         'use_of_equipment'      => $faker->sentence(),
-        'status'                => 'active',
         'manual_url'            => "http://192.168.1.10/manuals",
         'manual_file_location'  => 'Manual Filing Cabinet',
         'procedures_location'   => 'Procedures Filing Cabinet',
@@ -31,6 +35,7 @@ $factory->define(Equipment::class, function (Faker $faker) {
         'size_x'                => $faker->numberBetween(1, 1000),
         'size_y'                => $faker->numberBetween(1, 1000),
         'size_z'                => $faker->numberBetween(1, 1000),
-        'department_id'         => $department->id
+        'department_id'         => $department->id,
+        'status_id'             => $status->id
     ];
 });

@@ -26,7 +26,6 @@ class CreateEquipmentTable extends Migration
             $table->unsignedInteger('depreciation_amount')->nullable();
             $table->string('depreciation_note', 255)->nullable();
             $table->string('use_of_equipment', 100)->nullable();
-            $table->enum('status', ['active', 'inactive', 'stored'])->default('active');
             $table->string('manual_url')->nullable();
             $table->string('manual_file_location')->nullable();
             $table->string('procedures_location')->nullable();
