@@ -7,6 +7,7 @@ use App\Equipment;
 use App\Department;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
+use Illuminate\Validation\Rule;
 use App\Http\Requests\PurchaseEquipmentRequest;
 
 class EquipmentController extends Controller
@@ -42,11 +43,32 @@ class EquipmentController extends Controller
      * @param  \Illuminate\Http\PurchaseEquipmentRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(PurchaseEquipmentRequest $request)
+    public function store(Request $request)
     {
-        $data = $request->validate();
-        
-        $equipment = Equipment::create($request->all());
+        $today = date('Ymd');
+
+        $equipmentData = $request->validate([
+            "number" => ["required", "alpha_num", "max:6", Rule::unique('equipment')],
+            "brand" => "alpha_dash|max:50",
+            "model" => "alpha_dash|max:50",
+            "serial_number" => "alpha_dash|max:50",
+            "description" => "nullable",
+            "weight" => "integer|digits_between:0,4",
+            "purchase_date" => "date|before_or_equal:{$today}",
+            "purchase_value" => "numeric|min:0|nullable",
+            "depreciation_amount" => "numeric|min:0|max:{$request->purchase_value}|nullable",
+            "use_of_equipment" => "max:100|nullable",
+            "manual_url" => "url|nullable",
+            "service_by_days" => "integer|between:0,365",
+            "size_x" => "numeric|min:0",
+            "size_y" => "numeric|min:0",
+            "size_z" => "numeric|min:0",
+            "account_asset_number" => "alpha_dash|max:50|nullable",
+            "department_id" => "exists:departments,id",
+            "status_id" => "exists:statuses,id"
+        ]);
+
+        $equipment = Equipment::create($equipmentData);
 
         return view('equipment.show', compact('equipment'));
     }
@@ -80,11 +102,32 @@ class EquipmentController extends Controller
      * @param  \App\Equipment  $equipment
      * @return \Illuminate\Http\Response
      */
-    public function update(PurchaseEquipmentRequest $request, Equipment $equipment)
+    public function update(Request $request, Equipment $equipment)
     {
-        $data = $request->validate();
-        
-        $equipment->update($data);
+        $today = date('Ymd');
+
+        $equipmentData = $request->validate([
+            "number" => ["required", "alpha_num", "max:6", Rule::unique('equipment')->ignore($equipment->id)],
+            "brand" => "alpha_dash|max:50",
+            "model" => "alpha_dash|max:50",
+            "serial_number" => "alpha_dash|max:50",
+            "description" => "nullable",
+            "weight" => "integer|digits_between:0,4",
+            "purchase_date" => "date|before_or_equal:{$today}",
+            "purchase_value" => "numeric|min:0|nullable",
+            "depreciation_amount" => "numeric|min:0|max:{$request->purchase_value}|nullable",
+            "use_of_equipment" => "max:100|nullable",
+            "manual_url" => "url|nullable",
+            "service_by_days" => "integer|between:0,365",
+            "size_x" => "numeric|min:0",
+            "size_y" => "numeric|min:0",
+            "size_z" => "numeric|min:0",
+            "account_asset_number" => "alpha_dash|max:50|nullable",
+            "department_id" => "exists:departments,id",
+            "status_id" => "exists:statuses,id"
+        ]);
+
+        $equipment->update($equipmentData);
 
         return view('equipment.show', compact('equipment'));
     }

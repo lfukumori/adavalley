@@ -25,7 +25,12 @@ class PurchaseEquipmentRequest extends FormRequest
     public function rules()
     {
         $today = date('Ymd');
-        $unique = Rule::unique('equipment')->ignore($this->equipment->id ?? null);
+        
+        if (isset($this->equipment->id)) {
+            $unique = Rule::unique('equipment')->ignore($this->equipment->id);
+        } else {
+            $unique = Rule::unique('equipment');
+        }
 
         return [
             "number"                => ["required", "alpha_num", "max:6", $unique],
