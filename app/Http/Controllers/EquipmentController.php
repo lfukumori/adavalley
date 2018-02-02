@@ -44,7 +44,9 @@ class EquipmentController extends Controller
      */
     public function store(PurchaseEquipmentRequest $request)
     {
-        $equipment = Equipment::create($request->validate());
+        $data = $request->validate();
+        
+        $equipment = Equipment::create($request->all());
 
         return view('equipment.show', compact('equipment'));
     }
@@ -80,7 +82,9 @@ class EquipmentController extends Controller
      */
     public function update(PurchaseEquipmentRequest $request, Equipment $equipment)
     {
-        $equipment->update($request->validate());
+        $data = $request->validate();
+        
+        $equipment->update($data);
 
         return view('equipment.show', compact('equipment'));
     }

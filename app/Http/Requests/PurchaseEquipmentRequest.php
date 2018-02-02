@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class PurchaseEquipmentRequest extends FormRequest
@@ -22,17 +23,18 @@ class PurchaseEquipmentRequest extends FormRequest
      * @return array
      */
     public function rules()
-    {   
-        $today = new \DateTime();
-        
+    {
+        $today = date('Ymd');
+        $unique = Rule::unique('equipment')->ignore($this->equipment->id ?? null);
+
         return [
-            "number"                => "required|unique:equipment|alpha_num|max:6",
+            "number"                => ["required", "alpha_num", "max:6", $unique],
             "brand"                 => "alpha_dash|max:50",
             "model"                 => "alpha_dash|max:50",
             "serial_number"         => "alpha_dash|max:50",
             "description"           => "nullable",
             "weight"                => "integer|digits_between:0,4",
-            "purchase_date"         => "date|before_or_equal:{$today->format('Ymd')}",
+            "purchase_date"         => "date|before_or_equal:{$today}",
             "purchase_value"        => "numeric|min:0|nullable",
             "depreciation_amount"   => "numeric|min:0|max:{$this->purchase_value}|nullable",
             "use_of_equipment"      => "max:100|nullable",

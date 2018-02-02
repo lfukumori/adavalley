@@ -56,7 +56,8 @@ class UpdateEquipmentTest extends TestCase
     public function equipment_number_must_be_unique()
     {
         $number = 'number';
-        $duplicateNumber = $this->equipment->number;
+        $equipment = create(Equipment::class);
+        $duplicateNumber = $equipment->number;
 
         $this->updateEquipment([$number => $duplicateNumber])
             ->assertSessionHasErrors($number);
