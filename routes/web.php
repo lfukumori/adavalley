@@ -25,6 +25,9 @@ Route::get('/tests', function() {
     return $response . "</ol>";
 });
 
+Route::post('/temperature', 'TemperaturesController@store');
+Route::get('/temperature', 'TemperaturesController@store');
+
 Route::get('/', 'HomeController@index');
 
 Route::resource('equipment', 'EquipmentController');
