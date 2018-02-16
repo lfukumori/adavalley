@@ -15,7 +15,9 @@ class TemperaturesController extends Controller
      */
     public function index()
     {
-        //
+        $temperatures = Temperature::latest()->get();
+  
+        return view('temperatures.index', compact('temperatures'));
     }
 
     /**
@@ -41,10 +43,10 @@ class TemperaturesController extends Controller
         $temp->scale = $request->scale;
 
         if ($temp->save()) {
-            return Response(200);
+            return response('Success', 200);
         }
 
-        return Response(404);
+        return response('Error', 404);
     }
 
     /**
