@@ -16,7 +16,7 @@
                         @forelse($temperatures as $temperature)
                             <tr>
                                 <td>{{ $temperature->degrees }} {{ $temperature->scale }}</td>
-                                <td>{{ $temperature->created_at->format('Y-m-d h:i:s') }}</td>
+                                <td>{{ $temperature->created_at->timezone('America/Detroit')->format('Y-m-d h:i:s') }}</td>
                             </tr>
                         @empty
                             <tr>
