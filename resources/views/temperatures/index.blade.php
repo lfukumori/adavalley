@@ -3,7 +3,10 @@
 @section('content')
 <section class="section">
     <div class="container">
-       
+        <div style="width:500px;margin:0 auto 30px;">
+            {{ $cooler->links() }}
+        </div>
+
         <div style="display:flex;justify-content:space-around">
             <div>
                 <table class="table">

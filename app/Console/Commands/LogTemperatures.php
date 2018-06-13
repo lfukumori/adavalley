@@ -38,26 +38,34 @@ class LogTemperatures extends Command
      */
     public function handle()
     {
-        $data = file_get_contents('http://192.168.1.170/cooler');
-        $data = str_replace("'", '"', $data);
-        $data = json_decode($data, true);
-        if ($data['status'] == 200) {
-            $temp = new Temperature;
-            $temp->degrees = $data['degrees'];
-            $temp->scale = $data['scale'];
-            $temp->room = $data['room'];
-            $temp->save();
+        $this->logTemp('cooler');
+
+        $this->logTemp('freezer');
+    }
+
+    private function logTemp($room)
+    {
+        $data = $this->getData($room);
+
+        $temp = new Temperature;
+        $temp->degrees = $data['degrees'];
+        $temp->scale = $data['scale'];
+        $temp->room = $data['room'];
+
+        if (! $temp->save()) {
+            $this->logTemp($room);
         }
+
+        return true;
+    }
+
+    private function getData($room)
+    {
+        do {
+            $data = str_replace("'", '"', file_get_contents("http://192.168.1.170/{$room}"));
+            $data = json_decode($data, true);
+        } while ($data['status'] != 200);
         
-        $data = file_get_contents('http://192.168.1.170/freezer');
-        $data = str_replace("'", '"', $data);
-        $data = json_decode($data, true);
-        if ($data['status'] == 200) {
-            $temp = new Temperature;
-            $temp->degrees = $data['degrees'];
-            $temp->scale = $data['scale'];
-            $temp->room = $data['room'];
-            $temp->save();
-        }
+        return $data;
     }
 }
