@@ -3,20 +3,47 @@
 @section('content')
 <section class="section">
     <div class="container">
-        <div class="row">
-            <div class="col-xs-12">
+       
+        <div style="display:flex;justify-content:space-around">
+            <div>
                 <table class="table">
+                    <caption>Cooler</caption>
                     <thead>
                         <tr>
                             <th>Degrees</th>
-                            <th>Time</th>
+                            <th>DateTime</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @forelse($temperatures as $temperature)
+                        @forelse($cooler as $temperature)
                             <tr>
                                 <td>{{ $temperature->degrees }} {{ $temperature->scale }}</td>
-                                <td>{{ $temperature->created_at->format('Y-m-d h:i:s')</td>
+                                <td>{{ $temperature->created_at->format('F d - g:i a') }}</td>
+                            </tr>
+                        @empty
+                            <tr>
+                                <td colspan="2">No Temperatures Logged!</td>
+                            </tr>
+                        @endforelse
+                    </tbody>
+                </table>
+            </div>
+       
+
+            <div>
+                <table class="table">
+                    <caption>Freezer</caption>
+                    <thead>
+                        <tr>
+                            <th>Degrees</th>
+                            <th>DateTime</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @forelse($freezer as $temperature)
+                            <tr>
+                                <td>{{ $temperature->degrees }} {{ $temperature->scale }}</td>
+                                <td>{{ $temperature->created_at->format('F d - g:i a') }}</td>
                             </tr>
                         @empty
                             <tr>
@@ -27,6 +54,7 @@
                 </table>
             </div>
         </div>
+
     </div>
 </section>
 @endsection

@@ -27,6 +27,7 @@ Route::get('/tests', function() {
 
 Route::post('/temperature', 'TemperaturesController@store');
 Route::get('/temperature', 'TemperaturesController@index');
+Route::get('/cooler', 'TemperaturesController@cooler');
 
 Route::get('/', 'HomeController@index');
 

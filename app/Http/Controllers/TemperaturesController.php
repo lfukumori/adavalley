@@ -8,16 +8,22 @@ use Illuminate\Http\Response;
 
 class TemperaturesController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth')->only('index');
+    }
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
+
     public function index()
     {
-        $temperatures = Temperature::latest()->get();
-  
-        return view('temperatures.index', compact('temperatures'));
+        $cooler = Temperature::latest()->where('room', '=', 'cooler')->get();
+	$freezer = Temperature::latest()->where('room', '=', 'freezer')->get();
+        
+        return view('temperatures.index', compact('cooler', 'freezer'));
     }
 
     /**
@@ -41,12 +47,13 @@ class TemperaturesController extends Controller
         $temp = new Temperature;
         $temp->degrees = $request->degrees;
         $temp->scale = $request->scale;
+	$temp->room = $request->room;
 
         if ($temp->save()) {
             return response('Success', 200);
-        }
-
-        return response('Error', 404);
+        } else {
+            return response('Error, could not save temperature', 404);
+	}
     }
 
     /**
@@ -92,5 +99,24 @@ class TemperaturesController extends Controller
     public function destroy(Temperature $temperature)
     {
         //
+    }
+
+    public function cooler(Temperature $temperature)
+    {
+        $temps = Temperature::where('id', '<', 79)->orderBy('id', 'asc')->get();
+
+        $avg = Temperature::select(
+	    \DB::raw('avg(degrees) avg,
+	    min(degrees) min,
+	    max(degrees) max,
+	    count(id) count'))->where('id', '<', 79)->first();
+
+        return view('temperatures.index', [
+	    'temperatures' => $temps,
+	    'avg' => $avg->avg,
+	    'min' => $avg->min,
+	    'max' => $avg->max,
+	    'count' => $avg->count
+	]);
     }
 }
