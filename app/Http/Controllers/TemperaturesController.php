@@ -20,8 +20,8 @@ class TemperaturesController extends Controller
 
     public function index()
     {
-        $cooler = Temperature::latest()->where('room', '=', 'cooler')->get();
-	$freezer = Temperature::latest()->where('room', '=', 'freezer')->get();
+        $cooler = Temperature::latest()->where('room', '=', 'cooler')->paginate(15);
+	    $freezer = Temperature::latest()->where('room', '=', 'freezer')->paginate(15);
         
         return view('temperatures.index', compact('cooler', 'freezer'));
     }
