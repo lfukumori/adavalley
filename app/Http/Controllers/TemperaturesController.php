@@ -47,13 +47,13 @@ class TemperaturesController extends Controller
         $temp = new Temperature;
         $temp->degrees = $request->degrees;
         $temp->scale = $request->scale;
-	$temp->room = $request->room;
+	    $temp->room = $request->room;
 
         if ($temp->save()) {
             return response('Success', 200);
         } else {
             return response('Error, could not save temperature', 404);
-	}
+	    }
     }
 
     /**
@@ -99,24 +99,5 @@ class TemperaturesController extends Controller
     public function destroy(Temperature $temperature)
     {
         //
-    }
-
-    public function cooler(Temperature $temperature)
-    {
-        $temps = Temperature::where('id', '<', 79)->orderBy('id', 'asc')->get();
-
-        $avg = Temperature::select(
-	    \DB::raw('avg(degrees) avg,
-	    min(degrees) min,
-	    max(degrees) max,
-	    count(id) count'))->where('id', '<', 79)->first();
-
-        return view('temperatures.index', [
-	    'temperatures' => $temps,
-	    'avg' => $avg->avg,
-	    'min' => $avg->min,
-	    'max' => $avg->max,
-	    'count' => $avg->count
-	]);
     }
 }

@@ -53,7 +53,7 @@ class LogTemperatures extends Command
         $temp->room = $data['room'];
 
         if (! $temp->save()) {
-            $this->logTemp($room);
+            return $this->logTemp($room);
         }
 
         return true;
