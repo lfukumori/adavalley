@@ -76,6 +76,8 @@
 
 			element.contains('is-active') ? element.remove('is-active') : element.add('is-active');
 		}
-	</script>
+    </script>
+    
+    @yield('scripts')
 </body>
 </html>

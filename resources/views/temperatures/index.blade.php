@@ -3,9 +3,10 @@
 @section('content')
 <section class="section">
     <div class="container">
-        <div style="width:500px;margin:0 auto 30px;">
-            {{ $cooler->links() }}
-        </div>
+        <form onsubmit="filterTemps(e)" name="temperature" action="/temperature" style="width:50%;margin:0 auto 30px;text-align:center;">
+            <input id="date-picker" style="font-size:20px;" type="date" name="date" value="{{$date ?? ''}}">
+            <button style="font-size:22px;" type="submit">Show Temps</button>
+        </form>
 
         <div style="display:flex;justify-content:space-around">
             <div>
@@ -60,4 +61,20 @@
 
     </div>
 </section>
+@endsection
+
+@section('scripts')
+<script>
+    const datePicker = document.getElementById('date-picker');
+    const submitBtn = document.getElementById('submit');
+    const form = document.forms["temperature"];
+
+    let filterTemps = function(e) {
+        e.preventDefault();
+
+        form.action = "/temperature?date=" + datePicker.value;
+        console.log('test');
+        e.submit();
+    }
+</script>
 @endsection

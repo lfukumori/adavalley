@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Temperature;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Cache;
 
 class TemperaturesController extends Controller
 {
@@ -18,12 +20,25 @@ class TemperaturesController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function index()
+    public function index(Request $request)
     {
-        $cooler = Temperature::latest()->where('room', '=', 'cooler')->paginate(15);
-	    $freezer = Temperature::latest()->where('room', '=', 'freezer')->paginate(15);
-        
-        return view('temperatures.index', compact('cooler', 'freezer'));
+        if (is_null($request->date)) {
+            $date = (new Carbon())->format('Y-m-d');
+        } else {
+            $date = (new Carbon($request->date))->format('Y-m-d');
+        }
+
+        $cooler = Temperature::latest()
+                ->where('room', '=', 'cooler')
+                ->whereDate('created_at', '=', $date)
+                ->get();
+
+        $freezer = Temperature::latest()
+                ->where('room', '=', 'freezer')
+                ->whereDate('created_at', '=', $date)
+                ->get();
+     
+        return view('temperatures.index', compact('cooler', 'freezer', 'date'));
     }
 
     /**
