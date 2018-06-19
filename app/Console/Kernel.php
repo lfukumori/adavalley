@@ -25,7 +25,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('adavalley:logtemps')->everyMinute();
+        $schedule->command('adavalley:logtemps')->everyThirtyMinutes();
         // $schedule->call(function () {
         //     $request = Request::create('http://192.168.1.10/bdp/json_ftp.php', 'GET');
         //     $instance = json_decode(Route::dispatch($request)->getContent());
