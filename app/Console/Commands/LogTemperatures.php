@@ -19,7 +19,7 @@ class LogTemperatures extends Command
      *
      * @var string
      */
-    protected $description = 'Logs room temperatures to mysql database';
+    protected $description = 'Logs room temperatures to database';
 
     /**
      * Create a new command instance.
