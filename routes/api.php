@@ -15,10 +15,9 @@ use Illuminate\Http\Request;
 */
 
 Route::get('/temperatures/{room}', function ($room) {
-    echo Temperature::where('room', $room)
-	->orderBy('id', 'desc')
-	->take(1)
-	->value('degrees');
+    $data = json_decode(str_replace("'", '"', file_get_contents("http://192.168.1.170/{$room}")), true);
+    
+    echo $data['degrees'];
 })->middleware('cors');
 
 Route::get('/temperatures', function () {
