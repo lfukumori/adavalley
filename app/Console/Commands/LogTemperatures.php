@@ -62,8 +62,10 @@ class LogTemperatures extends Command
     private function getData($room)
     {
         do {
-            $data = str_replace("'", '"', file_get_contents("http://192.168.1.170/{$room}"));
-            $data = json_decode($data, true);
+            $data = json_decode(
+                str_replace("'", '"', file_get_contents("http://192.168.1.170/{$room}")), 
+                true
+            );
         } while ($data['status'] != 200);
         
         return $data;

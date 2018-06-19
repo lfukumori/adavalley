@@ -17,7 +17,7 @@ class CreateTemperaturesTable extends Migration
             $table->increments('id');
             $table->integer('degrees');
             $table->string('scale')->nullable();
-	    $table->string('room');
+	        $table->string('room');
             $table->timestamps();
         });
     }

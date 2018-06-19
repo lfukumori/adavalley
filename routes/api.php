@@ -22,10 +22,11 @@ Route::get('/temperatures/{room}', function ($room) {
 })->middleware('cors');
 
 Route::get('/temperatures', function () {
-    $temps = Temperature::latest()->take(2)->get();
+    $cooler = Temperature::latest()->where('room', '=', 'cooler')->first();
+    $freezer = Temperature::latest()->where('room', '=', 'freezer')->first();
 
     return json_encode([
-        ['room' => $temps->first()->room, 'degrees' => $temps->first()->degrees, 'time' => $temps->first()->created_at->format('g:i A')],
-        ['room' => $temps->last()->room, 'degrees' => $temps->last()->degrees, 'time' => $temps->last()->created_at->format('g:i A')]
+        ['room' => $cooler->room, 'degrees' => $cooler->degrees, 'time' => $cooler->created_at->format('g:i A')],
+        ['room' => $freezer->room, 'degrees' => $freezer->degrees, 'time' => $freezer->created_at->format('g:i A')]
     ]);
 })->middleware('cors');
