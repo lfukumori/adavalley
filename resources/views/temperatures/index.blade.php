@@ -22,7 +22,7 @@
                         @forelse($cooler as $temperature)
                             <tr>
                                 <td>{{ $temperature->degrees }} {{ $temperature->scale }}</td>
-                                <td>{{ $temperature->created_at->format('F d - g:i a') }}</td>
+                                <td style="text-align:right;">{{ $temperature->created_at->format('F d - g:i a') }}</td>
                             </tr>
                         @empty
                             <tr>
@@ -47,7 +47,7 @@
                         @forelse($freezer as $temperature)
                             <tr>
                                 <td>{{ $temperature->degrees }} {{ $temperature->scale }}</td>
-                                <td>{{ $temperature->created_at->format('F d - g:i a') }}</td>
+                                <td style="text-align:right;">{{ $temperature->created_at->format('F d - g:i a') }}</td>
                             </tr>
                         @empty
                             <tr>

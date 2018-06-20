@@ -36,6 +36,9 @@
 						<a href="{{ route('equipment.index') }}" class="navbar-item">
 							Equipment
 						</a>
+						<a href="{{ route('temperatures') }}" class="navbar-item">
+							Temperatures
+						</a>
 					</div>
 
 					<div class="navbar-end">
