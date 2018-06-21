@@ -22,6 +22,13 @@ class LogTemperatures extends Command
     protected $description = 'Logs room temperatures to database';
 
     /**
+     * A list of all rooms that need temperatures logged.
+     * 
+     * @var array
+     */
+    private $rooms = ['cooler', 'freezer'];
+
+    /**
      * Create a new command instance.
      *
      * @return void
@@ -38,19 +45,20 @@ class LogTemperatures extends Command
      */
     public function handle()
     {
-        $this->logTemp('cooler');
-
-        $this->logTemp('freezer');
+        foreach ($this->rooms as $room) {
+            $this->logTemp($room);
+        }
     }
 
     private function logTemp($room)
     {
         $data = $this->getData($room);
 
-        $temp = new Temperature;
-        $temp->degrees = $data['degrees'];
-        $temp->scale = $data['scale'];
-        $temp->room = $data['room'];
+        $temp = new Temperature([
+            'degrees'   => $data['degrees'],
+            'scale'     => $data['scale'],
+            'room'      => $data['room'],
+        ]);
 
         if (! $temp->save()) {
             return $this->logTemp($room);
@@ -62,12 +70,14 @@ class LogTemperatures extends Command
     private function getData($room)
     {
         do {
+            usleep(500000); // 1/2 second
+
             $data = json_decode(
-                str_replace("'", '"', file_get_contents("http://192.168.1.170/{$room}")), 
+                str_replace("'", '"', file_get_contents("http://192.168.1.170/{$room}")),
                 true
             );
         } while ($data['status'] != 200);
-        
+
         return $data;
     }
 }

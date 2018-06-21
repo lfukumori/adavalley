@@ -15,7 +15,14 @@ use Illuminate\Http\Request;
 */
 
 Route::get('/temperatures/{room}', function ($room) {
-    $data = json_decode(str_replace("'", '"', file_get_contents("http://192.168.1.170/{$room}")), true);
+    do {
+        usleep(500000); // 1/2 second
+
+        $data = json_decode(
+            str_replace("'", '"', file_get_contents("http://192.168.1.170/{$room}")),
+            true
+        );
+    } while ($data['status'] != 200);
     
     echo $data['degrees'];
 })->middleware('cors');
