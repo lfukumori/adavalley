@@ -22,12 +22,12 @@ class TemperaturesController extends Controller
 
     public function index(Request $request)
     {
-        if (is_null($request->date)) {
-            $date = (new Carbon())->format('Y-m-d');
-        } else {
+        try {
             $date = (new Carbon($request->date))->format('Y-m-d');
+        } catch (\Exception $e) {
+            $date = (Carbon::now()->format('Y-m-d'));
         }
-
+        
         $cooler = Temperature::latest()
                 ->where('room', '=', 'cooler')
                 ->whereDate('created_at', '=', $date)
