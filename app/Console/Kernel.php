@@ -25,7 +25,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('adavalley:logtemps')->everyMinute();
+        $schedule->exec("mosquitto -h 192.168.1.12 -p 1883 -t temperatures/cooler -n")->everyMinute();
     }
 
     /**

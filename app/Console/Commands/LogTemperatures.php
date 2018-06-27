@@ -46,7 +46,7 @@ class LogTemperatures extends Command
     public function handle()
     {
         foreach ($this->rooms as $room) {
-            $schedule->exec("mosquitto -h '192.168.1.12' -p 1883 -t temperatures/{$room} -n");
+            $schedule->exec("mosquitto -h 192.168.1.12 -p 1883 -t temperatures/{$room} -n");
         }
     }
 }
