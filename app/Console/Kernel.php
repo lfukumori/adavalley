@@ -25,7 +25,8 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->exec("mosquitto -h 192.168.1.12 -p 1883 -t temperatures/cooler -n")->everyMinute();
+        $schedule->exec("mosquitto_pub -h 192.168.1.12 -p 1883 -t 'temperatures/cooler' -n")->everyMinute();
+        $schedule->exec("mosquitto_pub -h 192.168.1.12 -p 1883 -t 'temperatures/freezer' -n")->everyMinute();
     }
 
     /**
