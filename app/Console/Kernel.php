@@ -4,7 +4,6 @@ namespace App\Console;
 
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
-use Illuminate\Http\Request;
 
 class Kernel extends ConsoleKernel
 {
@@ -25,8 +24,8 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->exec("mosquitto_pub -h 192.168.1.12 -p 1883 -t 'temperatures/cooler' -n")->everyMinute();
-        $schedule->exec("mosquitto_pub -h 192.168.1.12 -p 1883 -t 'temperatures/freezer' -n")->everyMinute();
+        // $schedule->command('inspire')
+        //          ->hourly();
     }
 
     /**
@@ -36,7 +35,7 @@ class Kernel extends ConsoleKernel
      */
     protected function commands()
     {
-        $this->load(__DIR__.'/Commands');
+        $this->load(__DIR__ . '/Commands');
 
         require base_path('routes/console.php');
     }
