@@ -46,38 +46,7 @@ class LogTemperatures extends Command
     public function handle()
     {
         foreach ($this->rooms as $room) {
-            $this->logTemp($room);
+            $schedule->exec("mosquitto -h '192.168.1.12' -p 1883 -t temperatures/{$room} -n");
         }
-    }
-
-    private function logTemp($room)
-    {
-        $data = $this->getData($room);
-
-        $temp = new Temperature([
-            'degrees'   => $data['degrees'],
-            'scale'     => $data['scale'],
-            'room'      => $data['room'],
-        ]);
-
-        if (! $temp->save()) {
-            return $this->logTemp($room);
-        }
-
-        return true;
-    }
-
-    private function getData($room)
-    {
-        do {
-            usleep(500000); // 1/2 second
-
-            $data = json_decode(
-                str_replace("'", '"', file_get_contents("http://192.168.1.170/{$room}")),
-                true
-            );
-        } while ($data['status'] != 200);
-
-        return $data;
     }
 }
