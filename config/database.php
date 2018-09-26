@@ -45,6 +45,36 @@ return [
             'prefix' => '',
         ],
 
+        'av_production' => [
+            'driver' => 'mysql',
+            'host' => env('DB_ADA_HOST'),
+            'port' => '3306',
+            'database' => env('DB_ADA_DATABASE'),
+            'username' => env('DB_ADA_USERNAME'),
+            'password' => env('DB_ADA_PASSWORD'),
+            'unix_socket' => '',
+            'charset' => 'utf8mb4',
+            'collation' => 'utf8mb4_unicode_ci',
+            'prefix' => '',
+            'strict' => true,
+            'engine' => null,
+        ],
+
+        'av_test' => [
+            'driver' => 'mysql',
+            'host' => env('DB_TEST_HOST'),
+            'port' => '3306',
+            'database' => env('DB_TEST_DATABASE'),
+            'username' => env('DB_TEST_USERNAME'),
+            'password' => env('DB_TEST_PASSWORD'),
+            'unix_socket' => '',
+            'charset' => 'utf8mb4',
+            'collation' => 'utf8mb4_unicode_ci',
+            'prefix' => '',
+            'strict' => true,
+            'engine' => null,
+        ],
+
         'mysql' => [
             'driver' => 'mysql',
             'host' => env('DB_HOST', '127.0.0.1'),

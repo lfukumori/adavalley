@@ -2,6 +2,9 @@
 
 namespace App\Console;
 
+use App\Temperature;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -24,8 +27,8 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')
-        //          ->hourly();
+        $schedule->command('monitor:delete')->weekly()->sundays()->at('1:00');
+        $schedule->command('edi:watch')->everyMinute();
     }
 
     /**

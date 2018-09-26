@@ -1,7 +1,9 @@
 <?php
 
-use Tests\Feature\Equipment\AddEquipmentTest;
-
+use App\Temperature;
+use App\TemperatureMonitor;
+use App\Events\TemperatureLogged;
+use Illuminate\Support\Facades\Log;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -37,3 +39,7 @@ Route::get('/logout', 'Auth\LoginController@logout')->name('logout');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::post('/edi', 'EdiController@store')->name('edi');
+
+Route::get('/edi', 'EdiController@index');

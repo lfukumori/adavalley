@@ -23,7 +23,9 @@
             "database/factories"
         ],
         "psr-4": {
-            "App\\": "app/"
+            "App\\": "app/",
+            "EDI\\": "app/EDI/",
+            "ERP\\": "app/ERP/"
         },
         "files": [
             "app/Http/Helpers/functions.php"

@@ -12,7 +12,9 @@ class VerifyCsrfToken extends Middleware
      * @var array
      */
     protected $except = [
-	'/temperature',
+        '/temperature',
+        '/api/calibration/offset/*',
         '/api/*',
+        '/edi',
     ];
 }

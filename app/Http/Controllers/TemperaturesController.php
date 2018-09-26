@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Temperature;
+use App\Events\TemperatureLogged;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Carbon;
@@ -29,16 +30,26 @@ class TemperaturesController extends Controller
         }
         
         $cooler = Temperature::latest()
-                ->where('room', '=', 'cooler')
-                ->whereDate('created_at', '=', $date)
-                ->get();
+            ->where('room', 'cooler')
+            ->whereDate('created_at', '=', $date)
+            ->get();
 
-        $freezer = Temperature::latest()
-                ->where('room', '=', 'freezer')
-                ->whereDate('created_at', '=', $date)
-                ->get();
+        $freezer1 = Temperature::latest()
+            ->where('room', 'freezer1')
+            ->whereDate('created_at', '=', $date)
+            ->get();
+
+        $freezer2 = Temperature::latest()
+            ->where('room', 'freezer2')
+            ->whereDate('created_at', '=', $date)
+            ->get();
+
+        $room6 = Temperature::latest()
+            ->where('room', 'room6')
+            ->whereDate('created_at', '=', $date)
+            ->get();
      
-        return view('temperatures.index', compact('cooler', 'freezer', 'date'));
+        return view('temperatures.index', compact('cooler', 'freezer1', 'freezer2', 'room6', 'date'));
     }
 
     /**
@@ -64,11 +75,13 @@ class TemperaturesController extends Controller
         $temp->scale = $request->scale;
 	    $temp->room = $request->room;
 
-        if ($temp->save()) {
-            return response('Success', 200);
-        } else {
-            return response('Error, could not save temperature', 404);
-	    }
+        if (! $temp->save()) {
+            return response('Error, could not save temperature', 500);
+        }
+
+        event(new TemperatureLogged($temp));
+
+        return response('Success', 200);
     }
 
     /**
