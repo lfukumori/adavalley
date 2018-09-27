@@ -2,7 +2,7 @@
 
 namespace ERP\Orders;
 
-use EDI\X12\Documents\PurchaseOrder;
+use EDI\X12\Documents\PO850;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use EDI\X12\Documents\FA997;
@@ -22,18 +22,16 @@ class SalesOrder
     private $item_master;
     protected $connection = 'av_test';
 
-    private function __construct(Array $data)
+    private function __construct($attributes)
     {
-        foreach ($data as $key => $value) {
-            $this->$key = $value;
-        }
-
-        return $this;
+        $attributes->each(function ($property, $value) {
+            $this->$property = $value;
+        });
     }
 
-    public static function fromDocument(PurchaseOrder $document)
+    public static function fromPO850(PO850 $PO850)
     {
-        return new self($document->toArray());
+        return new self($PO850->collect());
     }
 
     public function save()

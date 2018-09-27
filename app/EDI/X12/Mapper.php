@@ -2,8 +2,8 @@
 
 namespace EDI\X12;
 
-use EDI\X12\Map;
-use EDI\X12\Documents\PurchaseOrder;
+use EDI\X12\Maps\FA997;
+use EDI\X12\Documents\PO850;
 use Illuminate\Support\Facades\Storage;
 
 class Mapper
@@ -12,18 +12,18 @@ class Mapper
     private $document;
     private $template;
 
-    public function __construct(PurchaseOrder $document = null)
+    public function __construct()
     {
-        $this->document = $document;
-        $this->template = Storage::get('997-template.txt');
+        $this->map          = $this->setMap(new FA997());
+        $this->template     = $this->setTemplate(Storage::get('997-template.txt'));
     }
 
-    public function setDocument(Document $document)
+    public function setDocument(PO850 $document)
     {
         $this->document = $document;
     }
 
-    public function setMap(Map $map)
+    public function setMap(FA997 $map)
     {
         $this->map = $map;
     }
@@ -33,13 +33,18 @@ class Mapper
         $this->template = $template;
     }
 
-    public function translate($from, $to)
+    public function map()
     {
-        foreach ($this->map->getMap() as $keyword => $method) {
-            $this->template = str_replace($keyword, $this->document->$method(), $this->template);
-        }
+        $this->map->getMap()->each(function ($keyword, $method) {
+            $this->replace($keyword, $method);
+        });
 
         return preg_replace("/\r|\n/", "", $this->template);
+    }
+
+    private function replace($keyword, $replaceWith)
+    {
+        $this->template = str_replace($keyword, $this->document->$replaceWith(), $this->template);
     }
 
     public function send()

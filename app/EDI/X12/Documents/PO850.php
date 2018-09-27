@@ -2,11 +2,10 @@
 
 namespace EDI\X12\Documents;
 
-use ERP\Orders\SalesOrder;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 
-class PurchaseOrder 
+class PO850 
 {
     private $segments = [];
     private $isaControlNumber;
@@ -104,9 +103,9 @@ class PurchaseOrder
         return $items;
     }
 
-    public function toArray()
+    public function collect()
     {
-        return [
+        return collect([
             'customer_id' => $this->customerId(),
             'order_date' => $this->orderDate(),
             'expected_date' => $this->expectedDate(),
@@ -114,7 +113,7 @@ class PurchaseOrder
             'ship_to_id' => $this->shipToId(),
             'items' => $this->items(),
             'date_time' => $this->dateTime
-        ];
+        ]);
     }
 
     public function customerId()

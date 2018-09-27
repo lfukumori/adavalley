@@ -3,7 +3,7 @@
 namespace App\Console\Commands;
 
 use EDI\X12\Parser;
-use EDI\X12\EDIHandler;
+use EDI\X12\IncomingHandler;
 use Illuminate\Support\Carbon;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
@@ -26,23 +26,22 @@ class WatchEdi extends Command
      */
     protected $description = 'Watches edi partner directories for new incoming message files.';
 
-    protected $files;
-    protected $documents;
     private $parser;
     private $handler;
+    protected $files;
 
     /**
      * Create a new command instance.
      *
      * @return void
      */
-    public function __construct(EDIHandler $handler, Parser $parser)
+    public function __construct(IncomingHandler $handler, Parser $parser)
     {
         parent::__construct();
 
-        $this->files = collect(Storage::disk('edi')->files('spartannash/incoming'));
-        $this->parser = $parser;
-        $this->handler = $handler;
+        $this->parser   = $parser;
+        $this->handler  = $handler;
+        $this->files    = collect(Storage::disk('edi')->files('spartannash/incoming'));
     }
 
     /**
@@ -52,33 +51,40 @@ class WatchEdi extends Command
      */
     public function handle()
     {
-        if (! $this->files->count() > 0) return true;
+        try {
+            if (!$this->files->count() > 0) return true;
 
-        $this->files->each(function ($file) {
-            $documents = collect($this->parser::parseFile($file));
+            $this->files->each(function ($file) {
+                $PO850s = collect($this->parser::parseFile($file));
 
             // translate each document to erp order and insert into erp database
-            $documents->each(function ($document) {
+                $PO850s->each(function ($PO850) {
                 // handler->load will set erp order and fa997
-                $this->handler->load($document);
+                    $this->handler->setPO850($PO850);
 
-                
-                dd($this->handler->getDocument());
+                // TODO below
+                // $this->handler->handle();
+
+
+                    dd($this->handler->getPO850());
                 //$fa997 = $salesOrder->();
-                dd('test');
-                // $document->processed = $order->saveToERP();
+   
+                // $PO850->processed = $order->saveToERP();
 
-                $this->send997($document);
-            });                      
-        }); 
+                    $this->send997($PO850);
+                });
+            });
 
-        return true;
+            return true;
+        } catch (\Exception $e) {
+            dd($e->getMessage());
+        }
     }
 
-    private function send997($document) 
+    private function send997($PO850) 
     {
         try {
-            $translator = $this->getTranslator($document);
+            $translator = $this->getTranslator($PO850);
         
             // send 997 (put 997 file into outgoing directory)
             if (!$translator->send()) {
@@ -87,28 +93,28 @@ class WatchEdi extends Command
 
             // move original message to processed folder so it wont be processed again
             if (!Storage::disk('edi')->move(
-                "{$document->getAs2Id()}/incoming/{$document->fileName}",
-                "{$document->getAs2Id()}/incoming/processed/{$document->fileName}"
+                "{$PO850->getAs2Id()}/incoming/{$PO850->fileName}",
+                "{$PO850->getAs2Id()}/incoming/processed/{$PO850->fileName}"
             )) {
                 throw new \Exception('Failed to move 997 to processed directory.');
             }
 
             // save 997 document into database
             $inserted = DB::table('edi_outgoing')->insert([
-                'id'                => $document->getNewIsaControlNumber(),
-                'filepath'          => "{$document->as2Id}/incoming/processed/{$document->fileName}",
-                'processed'         => $document->processed,
+                'id'                => $PO850->getNewIsaControlNumber(),
+                'filepath'          => "{$PO850->as2Id}/incoming/processed/{$PO850->fileName}",
+                'processed'         => $PO850->processed,
                 'type'              => "997",
-                'created_at'        => $document->dateTime,
-                'updated_at'        => $document->dateTime,
-                'po_number'         => $document->poNumber(),
+                'created_at'        => $PO850->dateTime,
+                'updated_at'        => $PO850->dateTime,
+                'po_number'         => $PO850->poNumber(),
             ]);
 
             if (! $inserted) {
-                throw new \Exception("Failed to record document into database, with new control number of {$document->getNewIsaControlNumber()}");
+                throw new \Exception("Failed to record document into database, with new control number of {$PO850->getNewIsaControlNumber()}");
             }
 
-            Mail::send('emails.alert-brian', ['error' => "997 sent successfully<br>Control# {$document->getNewIsaControlNumber()}<br>Filepath: {$document->filePath}<br>Server: 192.168.1.12"], function ($message) {
+            Mail::send('emails.alert-brian', ['error' => "997 sent successfully<br>Control# {$PO850->getNewIsaControlNumber()}<br>Filepath: {$PO850->filePath}<br>Server: 192.168.1.12"], function ($message) {
                 $message->subject('997 Sent Successfully');
                 $message->from('brian@adavalley.com', 'EDI Monitor');
                 $message->to('bdbriandupont@gmail.com');
@@ -116,7 +122,7 @@ class WatchEdi extends Command
 
             return true;
         } catch (\Exception $e) {
-            Mail::send('emails.alert-brian', ['error' => "Error: {$e->getMessage()}<br>Filepath: {$document->filePath}<br>Server: 192.168.1.12"], function ($message) {
+            Mail::send('emails.alert-brian', ['error' => "Error: {$e->getMessage()}<br>Filepath: {$PO850->filePath}<br>Server: 192.168.1.12"], function ($message) {
                 $message->subject('997 Send Error');
                 $message->from('brian@adavalley.com', 'EDI Monitor');
                 $message->to('bdbriandupont@gmail.com');

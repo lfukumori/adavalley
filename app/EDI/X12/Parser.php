@@ -4,7 +4,7 @@ namespace EDI\X12;
 
 use \Exception;
 use EDI\X12\Document;
-use EDI\X12\Documents\PurchaseOrder;
+use EDI\X12\Documents\PO850;
 use Illuminate\Support\Facades\Storage;
 
 /**
@@ -126,7 +126,7 @@ class Parser
                             
                             switch ($segments[2][1]) {
                                 case '850':
-                                    array_push($documents, new PurchaseOrder($segments, $filepath));
+                                    array_push($documents, new PO850($segments, $filepath));
                                     break;
                                 case '997':
                                     array_push($documents, new FA997($segments, $filepath));
